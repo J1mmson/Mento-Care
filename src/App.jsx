@@ -484,7 +484,7 @@ function App() {
                 </div>
                 <div className="flex space-x-4 text-textPrimary items-center">
                   <a
-                    href="https://www.facebook.com/p/Mento-Care-61557586307146/"
+                    href="https://www.facebook.com/p/Mento-Care"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -553,7 +553,7 @@ function App() {
               {/* Social Icons */}
               <div className="flex space-x-6 justify-center items-center  mt-10">
                 <a
-                  href="https://www.facebook.com/MentoBarberShop"
+                  href="https://www.facebook.com/Mento-Care"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -564,7 +564,7 @@ function App() {
                   />
                 </a>
                 <a
-                  href="https://www.instagram.com/mento.barbershop/"
+                  href="https://www.instagram.com/mento.care/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -575,7 +575,7 @@ function App() {
                   />
                 </a>
                 <a
-                  href="https://www.tiktok.com/@mento_barbershop"
+                  href="https://www.tiktok.com/@mento.care"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
