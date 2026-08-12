@@ -592,7 +592,7 @@ function App() {
                 <h1
                   style={{
                     fontFamily: "Cormorant Garamond, SemiBold",
-                    fontSize: "50px",
+                    fontSize: "40px",
                     color: "#FCAF56",
                     marginBottom: 6,
                   }}
