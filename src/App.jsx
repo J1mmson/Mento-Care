@@ -459,7 +459,7 @@ function App() {
                   marginTop: "auto",
                 }}
               >
-                MENTO CARE
+                MENTO CARE - Kosmetologia Bochnia
               </h1>
               <p className="max-w-[675px] text-[#FFF8E7] text-[18px] font-thin">
                 Nowoczesna przestrzeń kosmetologii estetycznej, gdzie nauka
@@ -595,7 +595,7 @@ function App() {
                     marginBottom: 6,
                   }}
                 >
-                  MENTO CARE
+                  MENTO CARE - Kosmetologia Bochnia
                 </h1>
 
                 {/* Description */}
