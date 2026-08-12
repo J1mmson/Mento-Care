@@ -542,53 +542,54 @@ function App() {
         ) : (
           <section
             id="about"
-            className="snap-start h-screen w-full relative px-6 py-10 flex flex-col overflow-hidden"
+            className="snap-start h-screen w-full relative px-6 py-6 flex flex-col overflow-hidden"
             style={{
               minHeight: "100dvh",
-              // paddingTop: "max(10px, env(safe-area-inset-top))",
-              paddingBottom: "max(100px, env(safe-area-inset-bottom))",
+              paddingTop: "60px",
+              paddingBottom: "max(30px, env(safe-area-inset-bottom))",
             }}
           >
-            <div className="flex flex-col items-center justify-end h-full mt-auto z-30">
-              {/* Social Icons */}
-              <div className="flex space-x-6 justify-center items-center  mt-10">
+            <img
+              src={Girl}
+              alt="Nowoczesny salon kosmetyczny Bochnia - zabiegi na twarz"
+              className="absolute right-[-10%] w-[110%] h-auto pointer-events-none z-0"
+              style={{ top: "10%" }}
+            />
+
+            <div
+              className="absolute bottom-0 left-0 w-full h-[75%] pointer-events-none z-10"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(11, 12, 15, 0) 0%, rgba(11, 12, 15, 0.9) 30%, rgba(11, 12, 15, 1) 100%)",
+              }}
+            ></div>
+
+            <div className="flex flex-col items-center justify-end h-full z-20 relative">
+              <div className="flex space-x-6 justify-center items-center mb-4">
                 <a
-                  href="https://www.facebook.com/Mento-Care"
+                  href="https://www.facebook.com/p/Mento-Care-61557586307146/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
-                    src={FacebookLogo}
-                    alt="facebook_logo"
-                    style={{ height: "38px" }}
-                  />
+                  <img src={FacebookLogo} alt="facebook_logo" style={{ height: "30px" }} />
                 </a>
                 <a
                   href="https://www.instagram.com/mento.care/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
-                    src={InstagramLogo}
-                    alt="instagram_logo"
-                    style={{ height: "30px" }}
-                  />
+                  <img src={InstagramLogo} alt="instagram_logo" style={{ height: "24px" }} />
                 </a>
                 <a
                   href="https://www.tiktok.com/@mento.care"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
-                    src={TikTokLogo}
-                    alt="tiktok_logo"
-                    style={{ height: "30px" }}
-                  />
+                  <img src={TikTokLogo} alt="tiktok_logo" style={{ height: "24px" }} />
                 </a>
               </div>
 
               <div className="flex flex-col items-center text-center">
-                {/* Title */}
                 <h1
                   style={{
                     fontFamily: "Cormorant Garamond, SemiBold",
@@ -602,27 +603,33 @@ function App() {
                   <span style={{ fontSize: "26px", color: "#FFF8E7" }}>Kosmetologia Bochnia</span>
                 </h1>
 
-                {/* Description */}
+                {/* Opis */}
                 <p className="text-[#FFF8E7] text-[13px] text-justify max-w-xs mb-6 font-thin">
                   Nowoczesna przestrzeń kosmetologii estetycznej, gdzie nauka
                   spotyka się z troską. Specjalizujemy się w zaawansowanych
                   terapiach skóry twarzy i precyzyjnych zabiegach iniekcyjnych,
                   które subtelnie podkreślają naturalne piękno. Dzięki wiedzy,
-                  doświadczeniui indywidualnemu podejściu tworzymy efekty, które
+                  doświadczeniu i indywidualnemu podejściu tworzymy efekty, które
                   poprawiają wygląd i wzmacniają pewność siebie. Mento Care to
-                  miejsce, w którym liczy się jakość, spokóji dbałość o każdy
-                  detal.
+                  miejsce, w którym liczy się jakość, spokój i dbałość o każdy detal.
                 </p>
               </div>
 
-              {/* Contact Info */}
-              <div className="flex flex-col space-y-3 mt-0 mb-4 w-full items-center">
-                <div className="border-2 border-gray-400 rounded-full py-2 px-5 text-textPrimary text-sm w-full max-w-xs text-center z-30">
+              <div className="flex flex-col space-y-3 w-full items-center">
+                <a
+                  href="https://maps.app.goo.gl/RFGgzMwBrD8JDkG19"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-2 border-gray-400 rounded-[5px] py-3 px-5 text-[#FFF8E7] text-[14px] w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-white/10"
+                >
                   Nad Babicą 2, Bochnia
-                </div>
-                <div className="border-2 border-gray-400 rounded-full py-2 px-5 text-textPrimary text-sm w-full max-w-xs text-center z-30">
-                  +48 798 144 399
-                </div>
+                </a>
+                <a
+                  href="tel:+48798144399"
+                  className="border-2 border-[#FCAF56] bg-[#FCAF56]/10 rounded-[5px] py-3 px-5 text-[#FCAF56] text-[14px] font-bold w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-[#FCAF56] hover:text-[#FFF8E7]"
+                >
+                  Zadzwoń: +48 798 144 399
+                </a>
               </div>
             </div>
             <img
