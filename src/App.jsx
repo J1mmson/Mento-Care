@@ -549,20 +549,19 @@ function App() {
               paddingBottom: "max(30px, env(safe-area-inset-bottom))",
             }}
           >
-            {/* Obrazek w tle - przesunięty wyżej i pod spód */}
+            {/* Obrazek obcięty na sztywno do 55% wysokości ekranu (h-[55vh]) */}
             <img
               src={Girl}
               alt="Nowoczesny salon kosmetyczny Bochnia - zabiegi na twarz"
-              className="absolute right-[-10%] w-[110%] h-auto pointer-events-none z-0 opacity-60"
-              style={{ top: "5%" }}
+              className="absolute top-0 right-0 w-full h-[55vh] object-cover object-top pointer-events-none z-0"
             />
 
-            {/* Bardzo mocny, wysoki gradient na całą stronę. Od 35% wysokości zaczyna mocno ściemniać */}
+            {/* Agresywny gradient, który od 45% wysokości ekranu robi się już całkowicie czarny */}
             <div
               className="absolute inset-0 w-full h-full pointer-events-none z-10"
               style={{
                 background:
-                  "linear-gradient(180deg, rgba(11, 12, 15, 0) 0%, rgba(11, 12, 15, 0.85) 40%, rgba(11, 12, 15, 1) 75%)",
+                  "linear-gradient(180deg, rgba(11, 12, 15, 0) 0%, rgba(11, 12, 15, 0.4) 30%, rgba(11, 12, 15, 1) 45%, rgba(11, 12, 15, 1) 100%)",
               }}
             ></div>
 
