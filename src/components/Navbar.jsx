@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Logo from "../assets/mento-care-logo.png";
 import BurgerMenu from "../assets/burgerMenu.svg";
+import FacebookLogo from "../assets/facebook_logo.svg";
+import InstagramLogo from "../assets/instagram_logo.svg";
+import TikTokLogo from "../assets/tiktok_logo.svg";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -103,7 +106,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Desktop Right Side */}
+       {/* Desktop Right Side */}
         <div className="hidden md:flex space-x-[32px] uppercase text-lg font-light">
           {/* <span className="cursor-pointer text-textPrimary">BLOG</span> */}
 
@@ -120,6 +123,19 @@ const Navbar = () => {
             </span>
             <span>{`<`}</span>
           </p>
+        </div>
+
+        {/* Mobile Social Links (Nowy element) */}
+        <div className="flex md:hidden items-center space-x-4 z-20">
+          <a href="https://www.facebook.com/p/Mento-Care-61557586307146/" target="_blank" rel="noopener noreferrer">
+            <img src={FacebookLogo} alt="facebook" style={{ height: "24px" }} />
+          </a>
+          <a href="https://www.instagram.com/mento.care/" target="_blank" rel="noopener noreferrer">
+            <img src={InstagramLogo} alt="instagram" style={{ height: "20px" }} />
+          </a>
+          <a href="https://www.tiktok.com/@mento.care" target="_blank" rel="noopener noreferrer">
+            <img src={TikTokLogo} alt="tiktok" style={{ height: "20px" }} />
+          </a>
         </div>
 
         {/* Mobile Menu Icon */}
