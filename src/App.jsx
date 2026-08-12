@@ -553,16 +553,16 @@ function App() {
             <img
               src={Girl}
               alt="Nowoczesny salon kosmetyczny Bochnia - zabiegi na twarz"
-              className="absolute right-[-10%] w-[110%] h-auto pointer-events-none z-0"
-              style={{ top: "10%" }}
+              className="absolute right-[-10%] w-[110%] h-auto pointer-events-none z-0 opacity-60"
+              style={{ top: "5%" }}
             />
 
-            {/* Wyższy i ciemniejszy gradient dla czytelności tekstu */}
+            {/* Bardzo mocny, wysoki gradient na całą stronę. Od 35% wysokości zaczyna mocno ściemniać */}
             <div
-              className="absolute bottom-0 left-0 w-full h-[75%] pointer-events-none z-10"
+              className="absolute inset-0 w-full h-full pointer-events-none z-10"
               style={{
                 background:
-                  "linear-gradient(180deg, rgba(11, 12, 15, 0) 0%, rgba(11, 12, 15, 0.9) 30%, rgba(11, 12, 15, 1) 100%)",
+                  "linear-gradient(180deg, rgba(11, 12, 15, 0) 0%, rgba(11, 12, 15, 0.85) 40%, rgba(11, 12, 15, 1) 75%)",
               }}
             ></div>
 
