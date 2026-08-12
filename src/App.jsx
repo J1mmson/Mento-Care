@@ -549,6 +549,7 @@ function App() {
               paddingBottom: "max(30px, env(safe-area-inset-bottom))",
             }}
           >
+            {/* Obrazek w tle - przesunięty wyżej i pod spód */}
             <img
               src={Girl}
               alt="Nowoczesny salon kosmetyczny Bochnia - zabiegi na twarz"
@@ -556,6 +557,7 @@ function App() {
               style={{ top: "10%" }}
             />
 
+            {/* Wyższy i ciemniejszy gradient dla czytelności tekstu */}
             <div
               className="absolute bottom-0 left-0 w-full h-[75%] pointer-events-none z-10"
               style={{
@@ -565,31 +567,8 @@ function App() {
             ></div>
 
             <div className="flex flex-col items-center justify-end h-full z-20 relative">
-              <div className="flex space-x-6 justify-center items-center mb-4">
-                <a
-                  href="https://www.facebook.com/p/Mento-Care-61557586307146/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={FacebookLogo} alt="facebook_logo" style={{ height: "30px" }} />
-                </a>
-                <a
-                  href="https://www.instagram.com/mento.care/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={InstagramLogo} alt="instagram_logo" style={{ height: "24px" }} />
-                </a>
-                <a
-                  href="https://www.tiktok.com/@mento.care"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={TikTokLogo} alt="tiktok_logo" style={{ height: "24px" }} />
-                </a>
-              </div>
-
               <div className="flex flex-col items-center text-center">
+                {/* Złamany i pomniejszony tytuł H1 */}
                 <h1
                   style={{
                     fontFamily: "Cormorant Garamond, SemiBold",
@@ -615,18 +594,19 @@ function App() {
                 </p>
               </div>
 
+              {/* Klikalne przyciski akcji (Telefon i Mapa) z zaokrągleniami */}
               <div className="flex flex-col space-y-3 w-full items-center">
                 <a
                   href="https://maps.app.goo.gl/RFGgzMwBrD8JDkG19"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-gray-400 rounded-[5px] py-3 px-5 text-[#FFF8E7] text-[14px] w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-white/10"
+                  className="border-2 border-gray-400 rounded-full py-3 px-5 text-[#FFF8E7] text-[14px] w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-white/10"
                 >
                   Nad Babicą 2, Bochnia
                 </a>
                 <a
                   href="tel:+48798144399"
-                  className="border-2 border-[#FCAF56] bg-[#FCAF56]/10 rounded-[5px] py-3 px-5 text-[#FCAF56] text-[14px] font-bold w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-[#FCAF56] hover:text-[#FFF8E7]"
+                 className="border-2 border-[#FCAF56] bg-[#FCAF56]/10 rounded-full py-3 px-5 text-[#FCAF56] text-[14px] font-bold w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-[#FCAF56] hover:text-[#FFF8E7]"
                 >
                   Zadzwoń: +48 798 144 399
                 </a>
