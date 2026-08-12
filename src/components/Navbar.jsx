@@ -125,16 +125,16 @@ const Navbar = () => {
           </p>
         </div>
 
-        {/* Mobile Social Links (Nowy element) */}
+       {/* Mobile Social Links */}
         <div className="flex md:hidden items-center space-x-4 z-20">
           <a href="https://www.facebook.com/p/Mento-Care-61557586307146/" target="_blank" rel="noopener noreferrer">
-            <img src={FacebookLogo} alt="facebook" style={{ height: "24px" }} />
+            <img src={FacebookLogo} alt="facebook" style={{ height: "30px" }} />
           </a>
           <a href="https://www.instagram.com/mento.care/" target="_blank" rel="noopener noreferrer">
-            <img src={InstagramLogo} alt="instagram" style={{ height: "20px" }} />
+            <img src={InstagramLogo} alt="instagram" style={{ height: "24px" }} />
           </a>
           <a href="https://www.tiktok.com/@mento.care" target="_blank" rel="noopener noreferrer">
-            <img src={TikTokLogo} alt="tiktok" style={{ height: "20px" }} />
+            <img src={TikTokLogo} alt="tiktok" style={{ height: "24px" }} />
           </a>
         </div>
 
