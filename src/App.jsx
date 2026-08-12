@@ -592,12 +592,14 @@ function App() {
                 <h1
                   style={{
                     fontFamily: "Cormorant Garamond, SemiBold",
-                    fontSize: "40px",
+                    fontSize: "42px",
+                    lineHeight: "1.1",
                     color: "#FCAF56",
-                    marginBottom: 6,
+                    marginBottom: "12px",
                   }}
                 >
-                  MENTO CARE - Kosmetologia Bochnia
+                  MENTO CARE <br />
+                  <span style={{ fontSize: "26px", color: "#FFF8E7" }}>Kosmetologia Bochnia</span>
                 </h1>
 
                 {/* Description */}
