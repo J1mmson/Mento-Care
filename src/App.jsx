@@ -453,10 +453,12 @@ function App() {
               <h1
                 style={{
                   fontFamily: "Cormorant Garamond, SemiBold",
-                  fontSize: "103px",
+                  fontSize: "72px",
+                  lineHeight: "1.1",
                   color: "#FCAF56",
-                  marginBottom: "-10px",
+                  marginBottom: "15px",
                   marginTop: "auto",
+                  maxWidth: "800px"
                 }}
               >
                 MENTO CARE - Kosmetologia Bochnia
