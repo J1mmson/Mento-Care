@@ -623,7 +623,7 @@ function App() {
             </div>
             <img
               src={Girl}
-              alt="background photo"
+              alt="Nowoczesny salon kosmetyczny Bochnia - zabiegi na twarz"
               className="absolute right-0 w-[100%] h-auto pointer-events-none z-10"
               style={{ bottom: 160 }}
             />
@@ -929,7 +929,7 @@ function App() {
                   </legend>
                   <img
                     src={beforeAfterData[currentBeforeAfterIndex].before}
-                    alt="przed"
+                    alt="Metamorfoza skóry przed zabiegiem - kosmetolog Bochnia"
                     className="block w-full h-[430px] object-cover"
                   />
                 </fieldset>
@@ -947,7 +947,7 @@ function App() {
                   </legend>
                   <img
                     src={beforeAfterData[currentBeforeAfterIndex].after}
-                    alt="po"
+                    alt="Efekt po zabiegu w gabinecie kosmetycznym Mento Care Bochnia"
                     className="block w-full h-[430px] object-cover"
                   />
                 </fieldset>
@@ -1037,7 +1037,7 @@ function App() {
                   </legend>
                   <img
                     src={beforeAfterData[currentBeforeAfterIndex].before}
-                    alt="przed"
+                    alt="Metamorfoza skóry przed zabiegiem - salon kosmetyczny Bochnia"
                     className="block w-full h-[170px] object-cover"
                   />
                 </fieldset>
@@ -1053,7 +1053,7 @@ function App() {
                   </legend>
                   <img
                     src={beforeAfterData[currentBeforeAfterIndex].after}
-                    alt="po"
+                    alt="Efekt po zabiegu w salonie kosmetycznym Mento Care Bochnia"
                     className="block w-full h-[170px] object-cover"
                   />
                 </fieldset>
@@ -1101,7 +1101,7 @@ function App() {
               <div className="w-1/2 h-full relative">
                 <img
                   src={PriceListPhoto}
-                  alt="Price List"
+                  alt="Cennik usług kosmetologicznych Mento Care Bochnia"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
                 {/* <div className="absolute inset-0 bg-black bg-opacity-30"></div> */}
@@ -1192,7 +1192,7 @@ function App() {
             {/* Background Image */}
             <img
               src={Voucher}
-              alt="voucher"
+              alt="Voucher podarunkowy na zabiegi kosmetyczne Bochnia"
               className="absolute inset-0 w-full h-full object-cover z-0 opacity-90 transition-all duration-500"
             />
 
