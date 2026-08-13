@@ -79,7 +79,7 @@ const Navbar = () => {
           <a href="#about">
             <img
               src={Logo}
-              alt="Logo"
+              alt="Mento Care - Logo profesjonalnego salonu kosmetycznego w Bochni"
               className="logo cursor-pointer h-[60px] md:h-[100px] md:mt-[40px]"
             />
           </a>
