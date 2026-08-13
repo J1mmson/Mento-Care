@@ -476,10 +476,17 @@ function App() {
               <div className="flex justify-between items-center w-full mt-auto py-[2rem] z-20">
                 <div className="flex space-x-4">
                   <div className="border-2 border-gray-400 rounded-full py-2 px-5 text-textPrimary">
-                    Nad Babicą 2, Bochnia
+                    <a
+                  href="https://maps.app.goo.gl/RFGgzMwBrD8JDkG19"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-2 border-gray-400 rounded-full py-3 px-5 text-[#FFF8E7] text-[14px] w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-white/10"
+                >
+                  Nad Babicą 2, Bochnia
+                </a>
                   </div>
                   <div className="border-2 border-gray-400 rounded-full py-2 px-5 text-textPrimary">
-                    +48 798 144 399
+                    +48 505 204 943
                   </div>
                 </div>
                 <div className="flex space-x-4 text-textPrimary items-center">
@@ -604,10 +611,10 @@ function App() {
                   Nad Babicą 2, Bochnia
                 </a>
                 <a
-                  href="tel:+48798144399"
-                 className="border-2 border-[#FCAF56] bg-[#FCAF56]/10 rounded-full py-3 px-5 text-[#FCAF56] text-[14px] font-bold w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-[#FCAF56] hover:text-[#FFF8E7]"
+                  href="tel:+48505204943"
+                  className="border-2 border-[#FCAF56] bg-[#FCAF56]/10 rounded-full py-3 px-5 text-[#FCAF56] text-[14px] font-bold w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-[#FCAF56] hover:text-[#FFF8E7]"
                 >
-                  Zadzwoń: +48 798 144 399
+                  +48 505 204 943
                 </a>
               </div>
             </div>
