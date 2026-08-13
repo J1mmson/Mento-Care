@@ -442,7 +442,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="snap-y snap-mandatory h-screen overflow-y-scroll">
+      <main className="snap-y snap-mandatory h-screen overflow-y-scroll">
         {/* First Section - Home */}
         {!isMobile ? (
           <section
@@ -790,7 +790,7 @@ function App() {
           >
             <div className="h-full flex flex-col justify-center items-end">
               <div className="flex flex-col justify-center items-start px-[98px]">
-                <h1
+                <h2
                   style={{
                     fontFamily: "Cormorant Garamond, SemiBold",
                     fontSize: "72px",
@@ -800,7 +800,7 @@ function App() {
                   }}
                 >
                   Faustyna Hojnor
-                </h1>
+                </h2>
                 <p className="max-w-[675px] text-[#FFF8E7] text-[18px] font-thin">
                   Dyplomowana kosmetolog estetyczna | Właścicielka Mento Care |
                   Studentka pielęgniarstwa Z pasją łączę nowoczesną kosmetologię
@@ -846,7 +846,7 @@ function App() {
             <div className="flex flex-col items-center justify-end h-full mt-auto z-30">
               <div className="flex flex-col items-center text-center">
                 {/* Title */}
-                <h1
+                <h2
                   style={{
                     fontFamily: "Cormorant Garamond, SemiBold",
                     fontSize: "50px",
@@ -855,7 +855,7 @@ function App() {
                   }}
                 >
                   Faustyna Hojnor
-                </h1>
+                </h2>
 
                 {/* Description */}
                 <p className="text-[#FFF8E7] text-[13px] text-justify max-w-xs mb-0 font-thin">
@@ -894,7 +894,7 @@ function App() {
           >
             <div className="h-full flex flex-col justify-center px-[98px]">
               <div className="flex flex-col justify-center mt-[150px]">
-                <h1
+                <h2
                   style={{
                     fontFamily: "Cormorant Garamond, SemiBold",
                     fontSize: "35px",
@@ -903,7 +903,7 @@ function App() {
                   }}
                 >
                   Metamorfozy
-                </h1>
+                </h2>
               </div>
               <div className="flex items-center justify-between mt-5">
                 <fieldset className="mb-10 mr-5 relative border-2 border-[#FFF8E7]/40 rounded-md pt-3 px-6 pb-6 flex-1">
@@ -1003,7 +1003,7 @@ function App() {
             <div className="flex flex-col h-full z-30 justify-between">
               {/* Title */}
               <div className="flex flex-col items-center mt-4 mb-0">
-                <h1
+                <h2
                   style={{
                     fontFamily: "Cormorant Garamond, SemiBold",
                     fontSize: "36px",
@@ -1011,7 +1011,7 @@ function App() {
                   }}
                 >
                   Metamorfozy
-                </h1>
+                </h2>
               </div>
 
               {/* Images in column */}
@@ -1304,7 +1304,7 @@ function App() {
             </section>
           </>
         )}
-      </div>
+      </main>
     </>
   );
 }
