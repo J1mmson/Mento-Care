@@ -478,9 +478,7 @@ function App() {
                   <div className="border-2 border-gray-400 rounded-full py-2 px-5 text-textPrimary">
                     <a
                   href="https://maps.app.goo.gl/RFGgzMwBrD8JDkG19"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border-2 border-gray-400 rounded-full py-3 px-5 text-[#FFF8E7] text-[14px] w-full max-w-xs text-center flex items-center justify-center transition-colors hover:bg-white/10"
+                    target="_blank"
                 >
                   Nad Babicą 2, Bochnia
                 </a>
