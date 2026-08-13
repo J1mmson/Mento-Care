@@ -479,12 +479,19 @@ function App() {
                     <a
                   href="https://maps.app.goo.gl/RFGgzMwBrD8JDkG19"
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
                   Nad Babicą 2, Bochnia
                 </a>
                   </div>
                   <div className="border-2 border-gray-400 rounded-full py-2 px-5 text-textPrimary">
-                    +48 505 204 943
+                    <a
+                      href="tel:+48505204943"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      +48 505 204 943
+                    </a>
                   </div>
                 </div>
                 <div className="flex space-x-4 text-textPrimary items-center">
