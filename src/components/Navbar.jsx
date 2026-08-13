@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import Logo from "../assets/mento-care-logo.png";
+import Logo from "../assets/og-image.png";
 import BurgerMenu from "../assets/burgerMenu.svg";
 import FacebookLogo from "../assets/facebook_logo.svg";
 import InstagramLogo from "../assets/instagram_logo.svg";
