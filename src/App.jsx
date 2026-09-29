@@ -4,11 +4,9 @@ import "./App.css";
 import FacebookLogo from "./assets/facebook_logo.svg";
 import InstagramLogo from "./assets/instagram_logo.svg";
 import TikTokLogo from "./assets/tiktok_logo.svg";
-import Girl from "./assets/girl_main_page.png";
 import PriceListPhoto from "./assets/cennik.png";
 import Gradient from "./assets/gradient.svg";
 import Navbar from "./components/Navbar";
-import Girl2 from "./assets/about-me.png";
 import Przed1 from "./assets/metamorphoses/przed1.png";
 import Po1 from "./assets/metamorphoses/po1.png";
 import Przed2 from "./assets/metamorphoses/przed2.png";
@@ -24,13 +22,8 @@ import Po6 from "./assets/metamorphoses/po6.png";
 import Voucher from "./assets/voucher.png";
 
 // Services Images
-import Kobido from "./assets/servicesPhotos/uslugi-kobido.png";
-import MezoterapiaMikroiglowa from "./assets/servicesPhotos/MezoterapiaMikroiglowa.png";
-import MezoterapiaIglowa from "./assets/servicesPhotos/2-min.png";
-import MezoterapiaSkoryGlowy from "./assets/servicesPhotos/4-min.png";
 import TerapiaTradzikowa from "./assets/servicesPhotos/3-min.png";
 // import StylizacjaBrwi from "./assets/servicesPhotos/5-min.png";
-import PeelingKwasowy from "./assets/servicesPhotos/6-min.png";
 import RytualMentoCare from "./assets/servicesPhotos/7-min.png";
 import LampaLED from "./assets/servicesPhotos/lampa-led.png";
 import DlaNiego from "./assets/servicesPhotos/dla-niego.png";
@@ -38,7 +31,14 @@ import Konsultacja from "./assets/servicesPhotos/konsultacja.png";
 import Rytulal from "./assets/servicesPhotos/rytual.png";
 import BTX from "./assets/servicesPhotos/btx.png";
 import TerapiaTradzikowa2 from "./assets/servicesPhotos/terapia-tradzikowa.png";
-import HeadSPA from "./assets/servicesPhotos/head-spa.png";
+import NoweHeadSpa from "./assets/headspa.jpg";
+import NoweMezoIglowa from "./assets/iglowa.jpg";
+import NoweKobido from "./assets/kobido.jpg";
+import NoweMezoMikro from "./assets/mikro.jpg";
+import NowePeeling from "./assets/peeling.jpg";
+import NoweStymulatory from "./assets/stymulator.jpg";
+import GlownaImg from "./assets/glowna.png";
+import OmnieImg from "./assets/omnie.png";
 
 import { useIsMobile } from "./hooks/useIsMobile";
 
@@ -60,24 +60,21 @@ const listOfServices = [
   {
     id: 3,
     name: "Stymulatory tkankowe",
-    description:
-      "to zabiegi, które pobudzają skórę do intensywnej regeneracji i odbudowy, poprawiając jej jędrność, gładkość i elastyczność. Działają głęboko, aktywując produkcję kolagenu i elastyny – bez przerysowanego efektu.Idealne rozwiązanie dla tych, którzy cenią sobie świeży i młodzieńczy wygląd.",
-    image: MezoterapiaSkoryGlowy,
+    description: "to zabiegi, które pobudzają skórę do intensywnej regeneracji...",
+    image: NoweStymulatory,
   },
   {
     id: 4,
     name: "Mezoterapia igłowa",
-    description:
-      "to najlepszy sposób na intensywne odżywienie i nawilżenie skóry od wewnątrz. Poprzez drobne wkłucia dostarczane są koktajle pełne witamin, kwasu hialuronowego i składników aktywnych. Zabieg poprawia koloryt, wygładza i przywraca cerze blask. To idealna terapia dla skóry zmęczonej, odwodnionej lub pozbawionej życia.",
-    image: MezoterapiaIglowa,
+    description: "to najlepszy sposób na intensywne odżywienie i nawilżenie...",
+    image: NoweMezoIglowa, 
   },
-  {
+ {
     id: 5,
     name: "Mezoterapia mikroigłowa",
-    description:
-      "to zabieg, który pobudza skórę do intensywnej regeneracji poprzez mikronakłucia. Poprawia napięcie, strukturę i koloryt skóry, a drobne zmarszczki, blizny oraz rozszerzone pory zostają zredukowane. Efektem jest gładsza, jędrniejsza i wyraźnie odświeżona cera. To najlepsza metoda na poprawę jakości skóry w naturalny sposób.",
-    image: MezoterapiaMikroiglowa,
-  },
+    description: "to zabieg, który pobudza skórę do intensywnej regeneracji poprzez mikronakłucia...",
+    image: NoweMezoMikro, 
+  },  
   {
     id: 6,
     name: "BTX",
@@ -87,10 +84,9 @@ const listOfServices = [
   },
   {
     id: 7,
-    name: "Peeling kwasowy",
-    description:
-      "to skuteczna metoda złuszczania martwego naskórka i odświeżenia skóry. Pomagają w redukcji stanów zapalnych, przebarwień, zaskórników i drobnych zmarszczek. Skóra po zabiegu staje się gładsza, jaśniejsza i bardziej promienna. To doskonały wybór dla osób, które chcą poprawić kondycję cery i nadać jej zdrowy blask.",
-    image: PeelingKwasowy,
+    name: "Peeling medyczny", 
+    description: "to skuteczna metoda złuszczania martwego naskórka...",
+    image: NowePeeling, 
   },
   {
     id: 8,
@@ -109,16 +105,14 @@ const listOfServices = [
   {
     id: 10,
     name: "Masaż Kobido",
-    description:
-      "Kobido to japoński masaż liftingujący, który łączy relaks z widocznym efektem odmłodzenia. Poprawia krążenie, napięcie mięśni i owal twarzy, wygładzając drobne zmarszczki. Skóra staje się promienna, jędrna i pełna blasku.Idealny dla osób ceniących naturalne i nieinwazyjne metody pielęgnacji.",
-    image: Kobido,
+    description: "Kobido to japoński masaż liftingujący, który łączy relaks...",
+    image: NoweKobido, 
   },
   {
     id: 11,
     name: "Head SPA",
-    description:
-      "przyjemność zamknięta w dotyku, zapachu i dźwięku. Ciepła woda, aromatyczne olejki i powolny masaż skóry głowy pomagają wyciszyć umysł i rozluźnić ciało. Zabieg koi napięcia, poprawia krążenie, pielęgnuje włosy i skórę głowy. To błogi moment tylko dla Ciebie – spokojny, miękki i pełen relaksu.",
-    image: HeadSPA,
+    description: "przyjemność zamknięta w dotyku, zapachu i dźwięku...",
+    image: NoweHeadSpa,
   },
   {
     id: 12,
@@ -538,11 +532,10 @@ function App() {
               style={{ top: -400, right: -280 }}
             />
             <img
-              src={Girl}
-              alt="background photo"
-              className="absolute right-0 w-[40%] h-auto pointer-events-none z-10"
-              style={{ bottom: -100 }}
-            />
+                src={GlownaImg}
+                alt="Nowoczesny salon kosmetyczny Bochnia - zabiegi na twarz"
+                className="absolute right-0 bottom-0 h-[85vh] w-auto object-contain object-bottom pointer-events-none z-10"
+              />
             <div
               className="absolute bottom-0 left-0 w-full h-[32%] pointer-events-none z-10"
               style={{
@@ -563,19 +556,19 @@ function App() {
           >
             {/* Obrazek obcięty na sztywno do 55% wysokości ekranu (h-[55vh]) */}
             <img
-              src={Girl}
-              alt="Nowoczesny salon kosmetyczny Bochnia - zabiegi na twarz"
-              className="absolute top-0 right-0 w-full h-[55vh] object-cover object-top pointer-events-none z-0"
-            />
+  src={GlownaImg}
+  alt="Nowoczesny salon kosmetyczny Bochnia"
+  className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none z-0 opacity-60"
+/>
 
-            {/* Agresywny gradient, który od 45% wysokości ekranu robi się już całkowicie czarny */}
-            <div
-              className="absolute inset-0 w-full h-full pointer-events-none z-10"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(11, 12, 15, 0) 0%, rgba(11, 12, 15, 0.4) 30%, rgba(11, 12, 15, 1) 45%, rgba(11, 12, 15, 1) 100%)",
-              }}
-            ></div>
+{/* Agresywny gradient (z-10), który musi być NAD zdjęciem, żeby tekst był czytelny */}
+<div
+  className="absolute inset-0 w-full h-full pointer-events-none z-10"
+  style={{
+    background:
+      "linear-gradient(180deg, rgba(11, 12, 15, 0) 0%, rgba(11, 12, 15, 0) 45%, rgba(11, 12, 15, 0.9) 65%, rgba(11, 12, 15, 1) 80%, rgba(11, 12, 15, 1) 100%)",
+  }}
+></div>
 
             <div className="flex flex-col items-center justify-end h-full z-20 relative">
               <div className="flex flex-col items-center text-center">
@@ -598,10 +591,7 @@ function App() {
                   Nowoczesna przestrzeń kosmetologii estetycznej, gdzie nauka
                   spotyka się z troską. Specjalizujemy się w zaawansowanych
                   terapiach skóry twarzy i precyzyjnych zabiegach iniekcyjnych,
-                  które subtelnie podkreślają naturalne piękno. Dzięki wiedzy,
-                  doświadczeniu i indywidualnemu podejściu tworzymy efekty, które
-                  poprawiają wygląd i wzmacniają pewność siebie. Mento Care to
-                  miejsce, w którym liczy się jakość, spokój i dbałość o każdy detal.
+                  które subtelnie podkreślają naturalne piękno.
                 </p>
               </div>
 
@@ -623,26 +613,7 @@ function App() {
                 </a>
               </div>
             </div>
-            <img
-              src={Girl}
-              alt="Nowoczesny salon kosmetyczny Bochnia - zabiegi na twarz"
-              className="absolute right-0 w-[100%] h-auto pointer-events-none z-10"
-              style={{ bottom: 160 }}
-            />
-            // ...existing code...
-            {/* <img
-              src={Gradient}
-              alt="Gradient"
-              className="absolute pointer-events-none z-0"
-              style={{
-                top: -500,
-                right: -200,
-                // width: "2000px", // konkretna wartość w pikselach
-                height: "auto",
-                minWidth: "200vw", // backup z viewport units
-              }}
-            /> */}
-            // ...existing code...
+           
             {/* Bottom gradient overlay */}
             <div
               className="absolute bottom-0 left-0 w-full h-[40%] pointer-events-none z-10"
@@ -832,10 +803,9 @@ function App() {
               style={{ top: -700, right: 150 }}
             />
             <img
-              src={Girl2}
-              alt="background photo"
-              className="absolute left-20 w-[31%] h-auto pointer-events-none z-10"
-              style={{ bottom: -200 }}
+              src={OmnieImg}
+              alt="Kosmetolog Bochnia - Faustyna Hojnor"
+              className="absolute left-[5%] bottom-0 h-[80vh] w-auto object-contain object-bottom pointer-events-none z-10"
             />
             <div
               className="absolute bottom-0 left-0 w-full h-[32%] pointer-events-none z-10"
@@ -883,10 +853,9 @@ function App() {
               </div>
             </div>
             <img
-              src={Girl2}
-              alt="background photo"
-              className="absolute right-0 w-[100%] h-auto pointer-events-none z-10"
-              style={{ bottom: -50 }}
+              src={OmnieImg}
+              alt="Kosmetolog Bochnia - Faustyna Hojnor"
+              className="absolute bottom-0 right-0 w-full h-[50vh] object-contain object-bottom pointer-events-none z-10"
             />
             <div
               className="absolute bottom-0 left-0 w-full h-[40%] pointer-events-none z-10"
