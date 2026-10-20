@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
+import { handleAnchorClick } from "./lib/scrollToSection";
 import Hero from "./sections/Hero";
 import Services from "./sections/Services";
 import AboutMe from "./sections/AboutMe";
@@ -9,6 +11,12 @@ import Faq from "./sections/Faq";
 import Contact from "./sections/Contact";
 
 export default function App() {
+  // wszystkie linki „#sekcja” przewijają niezawodnie także na iPhonie
+  useEffect(() => {
+    document.addEventListener("click", handleAnchorClick);
+    return () => document.removeEventListener("click", handleAnchorClick);
+  }, []);
+
   return (
     <>
       <a

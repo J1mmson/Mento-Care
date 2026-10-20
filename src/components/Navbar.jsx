@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FiMenu, FiPhone, FiX } from "react-icons/fi";
 import Img from "./Img";
 import Social from "./Social";
+import { scrollToSection } from "../lib/scrollToSection";
 import { logo } from "../assets/img";
 import { BUSINESS, NAV } from "../data/content";
 
@@ -79,18 +80,11 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Przewijanie do sekcji z menu mobilnego – ręcznie, bo samo kliknięcie w link
-  // nie przewijało strony na telefonach (Safari/Chrome przy zamykaniu menu).
+  // Menu mobilne: zamknij i przewiń do sekcji (patrz src/lib/scrollToSection.js)
   const goTo = (e, id) => {
     e.preventDefault();
     setOpen(false);
-    const target = document.getElementById(id);
-    if (!target) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY, behavior: reduce ? "auto" : "smooth" });
-      history.replaceState(null, "", `#${id}`);
-    });
+    scrollToSection(id);
   };
 
   return (
@@ -174,7 +168,7 @@ export default function Navbar() {
       {/* Menu mobilne */}
       <div
         id="menu-mobilne"
-        className={`fixed inset-0 z-10 flex touch-none flex-col items-center justify-center overscroll-none bg-bgPrimary/95 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-10 flex flex-col items-center justify-center overscroll-none bg-bgPrimary/95 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
