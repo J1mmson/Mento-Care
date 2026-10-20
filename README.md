@@ -1,12 +1,36 @@
-# React + Vite
+# Mento Care – strona mentocare.pl
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite + Tailwind, hosting: Netlify (deploy po `git push` na `main`).
 
-Currently, two official plugins are available:
+## Najczęstsze zmiany
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Co chcesz zmienić | Gdzie |
+| --- | --- |
+| Ceny, cennik, godziny, telefon, linki, FAQ, opisy zabiegów | `src/data/business.js` |
+| Link do wystawiania opinii Google (przycisk „Oceń nas”) | `src/data/business.js` → `googleReviewUrl` |
+| Zdjęcia | podmień plik w `src/assets` (ta sama nazwa) i uruchom `npm run images` |
+| Teksty sekcji (o nas, o mnie, voucher) | `src/sections/*.jsx` |
 
-## Expanding the ESLint configuration
+Dane strukturalne dla Google (JSON-LD) generują się automatycznie z `src/data/business.js`
+podczas budowania – nie trzeba ich edytować ręcznie.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Zdjęcia
+
+Oryginały (PNG/JPG) leżą w `src/assets`. Strona używa lekkich wersji WebP z `src/assets/img`,
+generowanych skryptem:
+
+```bash
+npm i -D sharp      # tylko za pierwszym razem
+npm run images      # tworzy src/assets/img/* + ikony i obrazek do udostępniania w public/
+```
+
+Nowe zdjęcie w hero / „o mnie” najlepiej wycięte z tła (PNG z przezroczystością), ok. 1365×2048 px.
+
+## Komendy
+
+```bash
+npm install
+npm run dev       # podgląd na http://localhost:5173
+npm run build     # build + prerender treści do dist/index.html
+npm run preview   # podgląd wersji produkcyjnej
+```

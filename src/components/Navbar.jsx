@@ -1,193 +1,202 @@
-import { useState, useEffect } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import Logo from "../assets/og-image.png";
-import BurgerMenu from "../assets/burgerMenu.svg";
-import FacebookLogo from "../assets/facebook_logo.svg";
-import InstagramLogo from "../assets/instagram_logo.svg";
-import TikTokLogo from "../assets/tiktok_logo.svg";
+import { useEffect, useState } from "react";
+import { FiMenu, FiPhone, FiX } from "react-icons/fi";
+import Img from "./Img";
+import Social from "./Social";
+import { logo } from "../assets/img";
+import { BUSINESS, NAV } from "../data/content";
 
-const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(null);
+const LEFT = NAV.slice(0, 4);
+const RIGHT = NAV.slice(4);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const menus = [
-    { name: "o nas", id: "about" },
-    { name: "usługi", id: "services" },
-    { name: "o mnie", id: "about-me" },
-    { name: "metamorfozy", id: "metamorphoses" },
-    { name: "cennik", id: "pricing" },
-    { name: "voucher", id: "voucher" },
-  ];
+function useActiveSection() {
+  const [active, setActive] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (location.pathname !== "/") {
-      setActiveSection(null);
-      return;
-    }
-
-    const options = {
-      root: null,
-      rootMargin: "-10% 0px -10% 0px", // Adds margin to trigger earlier
-      threshold: [0, 0.1, 0.5, 0.9], // Multiple thresholds for better detection
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      // Find the entry with highest intersection ratio
-      let mostVisible = null;
-      let highestRatio = 0;
-
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > highestRatio) {
-          highestRatio = entry.intersectionRatio;
-          mostVisible = entry;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = window.innerHeight * 0.45;
+      let current = null;
+      for (const { id } of NAV) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        if (r.top <= line && r.bottom > line) {
+          current = id;
+          break;
         }
-      });
-
-      // Only update if we have a significantly visible section
-      if (mostVisible && mostVisible.intersectionRatio > 0.1) {
-        setActiveSection(mostVisible.target.id);
       }
-    }, options);
+      setActive(current);
+      setScrolled(window.scrollY > 40);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
-    // Observe main sections
-    const sectionsToObserve = [
-      "about",
-      "services",
-      "about-me",
-      "pricing",
-      "metamorphoses",
-      "voucher",
-    ];
+  return { active, scrolled };
+}
 
-    sectionsToObserve.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-      }
-    });
+function NavLink({ item, active, onClick }) {
+  const isActive = active === item.id;
+  return (
+    <a
+      href={`#${item.id}`}
+      onClick={onClick}
+      aria-current={isActive ? "true" : undefined}
+      className={`flex items-center gap-2 whitespace-nowrap transition-colors hover:text-prime ${
+        isActive ? "text-prime" : "text-textPrimary"
+      }`}
+    >
+      <span
+        aria-hidden="true"
+        className={`h-1.5 w-1.5 rounded-full bg-prime transition-opacity ${
+          isActive ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      {item.label}
+    </a>
+  );
+}
 
-    // Cleanup observer on unmount
-    return () => observer.disconnect();
-  }, [menus]);
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const { active, scrolled } = useActiveSection();
+
+  useEffect(() => {
+    if (!open) return;
+    const root = document.documentElement;
+    const prev = root.style.overflow;
+    root.style.overflow = "hidden";
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      root.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const close = () => setOpen(false);
 
   return (
-    <nav className="fixed top-5 md:top-10 left-0 w-full z-50 px-4 md:px-[98px]">
-      <div className="flex justify-between items-center">
-        {/* Logo */}
-        <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-20">
-          <a href="#about">
-            <img
-              src={Logo}
-              alt="Mento Care - Logo profesjonalnego salonu kosmetycznego w Bochni"
-              className="logo cursor-pointer h-[60px] md:h-[100px] md:mt-[40px]"
-            />
-          </a>
-        </div>
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex space-x-[24px] uppercase text-[16px] font-light">
-          {menus.map((menu, i) => (
-            <a
-              key={i}
-              href={`#${menu.id}`}
-              onClick={() => `/#${menu.id}`}
-              className={`cursor-pointer flex items-center ${
-                [menu.id].some((id) => activeSection === id)
-                  ? "text-prime"
-                  : "text-textPrimary"
-              }`}
-            >
-              {[menu.id].some((id) => activeSection === id) && (
-                <span className="w-2 h-2 bg-prime rounded-full mr-2"></span>
-              )}
-              {menu.name}
-            </a>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+        scrolled
+          ? "bg-gradient-to-b from-bgPrimary/95 via-bgPrimary/70 to-transparent"
+          : "bg-gradient-to-b from-bgPrimary/60 to-transparent"
+      }`}
+    >
+      <nav
+        aria-label="Menu główne"
+        className="mx-auto flex h-[76px] items-center justify-between px-5 lg:grid lg:h-[110px] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-6 xl:gap-8 lg:px-10 xl:px-[98px]"
+      >
+        {/* Linki – lewa strona (desktop) */}
+        <ul className="hidden items-center gap-5 text-[13px] font-light uppercase tracking-[0.12em] lg:flex xl:gap-8 xl:text-[15px]">
+          {LEFT.map((item) => (
+            <li key={item.id}>
+              <NavLink item={item} active={active} />
+            </li>
           ))}
-        </div>
+        </ul>
 
-       {/* Desktop Right Side */}
-        <div className="hidden md:flex space-x-[32px] uppercase text-lg font-light">
-          {/* <span className="cursor-pointer text-textPrimary">BLOG</span> */}
+        {/* Logo */}
+        <a
+          href="#o-nas"
+          className="relative z-20 shrink-0 lg:justify-self-center"
+          aria-label="Mento Care – strona główna"
+        >
+          <Img
+            img={logo}
+            alt="Mento Care – kosmetologia Bochnia"
+            sizes="(min-width: 1024px) 80px, 52px"
+            loading="eager"
+            className="h-11 w-[51px] max-w-none lg:h-[68px] lg:w-[78px]"
+          />
+        </a>
 
-          <p className="text-prime cursor-pointer flex items-center gap-2 text-[16px]">
-            <span>{`>`}</span>
-            <span>
-              <a
-                href="https://booksy.com/pl-pl/221086_kosmetologia-estetyczna-faustyna-hojnor_salon-kosmetyczny_10189_bochnia"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                zarezerwuj
-              </a>
-            </span>
-            <span>{`<`}</span>
-          </p>
-        </div>
-
-       {/* Mobile Social Links */}
-        <div className="flex md:hidden items-center space-x-4 z-20">
-          <a href="https://www.facebook.com/p/Mento-Care-61557586307146/" target="_blank" rel="noopener noreferrer">
-            <img src={FacebookLogo} alt="facebook" style={{ height: "30px" }} />
-          </a>
-          <a href="https://www.instagram.com/mento.care/" target="_blank" rel="noopener noreferrer">
-            <img src={InstagramLogo} alt="instagram" style={{ height: "24px" }} />
-          </a>
-          <a href="https://www.tiktok.com/@mento.care" target="_blank" rel="noopener noreferrer">
-            <img src={TikTokLogo} alt="tiktok" style={{ height: "24px" }} />
-          </a>
-        </div>
-
-        {/* Mobile Menu Icon */}
-        <div className="md:hidden z-20">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-3xl text-prime focus:outline-none"
+        {/* Linki – prawa strona + rezerwacja (desktop) */}
+        <div className="hidden items-center justify-end gap-5 text-[13px] font-light uppercase tracking-[0.12em] lg:flex xl:gap-8 xl:text-[15px]">
+          <ul className="flex items-center gap-5 xl:gap-8">
+            {RIGHT.map((item) => (
+              <li key={item.id}>
+                <NavLink item={item} active={active} />
+              </li>
+            ))}
+          </ul>
+          <a
+            href={BUSINESS.booksyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whitespace-nowrap rounded-full border border-prime px-5 py-2 text-prime transition-colors hover:bg-prime hover:text-bgPrimary"
           >
-            {isMobileMenuOpen ? (
-              <AiOutlineClose style={{ color: "#FFFFFF" }} />
-            ) : (
-              <img src={BurgerMenu} style={{ height: "20px" }} alt="Menu" />
-            )}
+            zarezerwuj
+          </a>
+        </div>
+
+        {/* Mobile: rezerwacja + menu */}
+        <div className="relative z-20 flex items-center gap-2 lg:hidden">
+          <a
+            href={BUSINESS.booksyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-prime/80 bg-bgPrimary/40 px-4 py-2 text-[12px] uppercase tracking-[0.14em] text-prime backdrop-blur-sm"
+          >
+            zarezerwuj
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="menu-mobilne"
+            aria-label={open ? "Zamknij menu" : "Otwórz menu"}
+            className="flex h-11 w-11 items-center justify-center text-[26px] text-cream"
+          >
+            {open ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 backdrop-blur-md flex flex-col justify-center items-center text-lg font-light uppercase z-10">
-          <ul className="flex flex-col gap-8 text-center text-white text-[18px]">
-            {menus.map((item, index) => (
+      {/* Menu mobilne */}
+      <div
+        id="menu-mobilne"
+        className={`fixed inset-0 z-10 flex flex-col items-center justify-center bg-bgPrimary/95 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
+          open ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+      >
+        <ul className="flex flex-col items-center gap-3 font-serif text-[28px] leading-tight text-cream">
+          {NAV.map((item) => (
+            <li key={item.id}>
               <a
-                key={index}
                 href={`#${item.id}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="cursor-pointer"
+                onClick={close}
+                tabIndex={open ? 0 : -1}
+                className={active === item.id ? "text-prime" : ""}
               >
-                {item.name}
+                {item.label}
               </a>
-            ))}
-            {/* <li>BLOG</li> */}
-            <li>
-              <p className="text-prime font-bold flex justify-center items-center gap-2">
-                <span>{`>`}</span>
-                <span>
-                  <a
-                    href="https://booksy.com/pl-pl/221086_kosmetologia-estetyczna-faustyna-hojnor_salon-kosmetyczny_10189_bochnia"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    zarezerwuj
-                  </a>
-                </span>
-                <span>{`<`}</span>
-              </p>
             </li>
-          </ul>
+          ))}
+        </ul>
+        <div className="mt-8 flex flex-col items-center gap-5">
+          <a
+            href={`tel:${BUSINESS.phone}`}
+            tabIndex={open ? 0 : -1}
+            className="flex items-center gap-2 text-[16px] tracking-wide text-prime"
+          >
+            <FiPhone aria-hidden="true" /> {BUSINESS.phoneDisplay}
+          </a>
+          <Social />
         </div>
-      )}
-    </nav>
+      </div>
+    </header>
   );
-};
-
-export default Navbar;
+}

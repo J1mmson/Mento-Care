@@ -1,0 +1,9 @@
+# Netlify: pliki z hashem w nazwie (JS, CSS, zdjęcia) mogą być trzymane w cache przeglądarki na stałe
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=604800
+
+/*.jpg
+  Cache-Control: public, max-age=604800
