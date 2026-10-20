@@ -74,18 +74,24 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!open) return;
-    const root = document.documentElement;
-    const prev = root.style.overflow;
-    root.style.overflow = "hidden";
     const onKey = (e) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => {
-      root.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const close = () => setOpen(false);
+  // Przewijanie do sekcji z menu mobilnego – ręcznie, bo samo kliknięcie w link
+  // nie przewijało strony na telefonach (Safari/Chrome przy zamykaniu menu).
+  const goTo = (e, id) => {
+    e.preventDefault();
+    setOpen(false);
+    const target = document.getElementById(id);
+    if (!target) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY, behavior: reduce ? "auto" : "smooth" });
+      history.replaceState(null, "", `#${id}`);
+    });
+  };
 
   return (
     <header
@@ -168,7 +174,7 @@ export default function Navbar() {
       {/* Menu mobilne */}
       <div
         id="menu-mobilne"
-        className={`fixed inset-0 z-10 flex flex-col items-center justify-center bg-bgPrimary/95 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-10 flex touch-none flex-col items-center justify-center overscroll-none bg-bgPrimary/95 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -177,7 +183,7 @@ export default function Navbar() {
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
-                onClick={close}
+                onClick={(e) => goTo(e, item.id)}
                 tabIndex={open ? 0 : -1}
                 className={active === item.id ? "text-prime" : ""}
               >
