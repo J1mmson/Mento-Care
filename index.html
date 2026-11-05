@@ -85,6 +85,27 @@
         src="https://www.facebook.com/tr?id=1298478998016833&ev=PageView&noscript=1"
     /></noscript>
     <div id="root"></div>
+    <!--
+      Netlify Forms: szkielet formularza zamówienia vouchera (src/components/VoucherForm.jsx).
+      Netlify wykrywa go przy publikacji. Dodajesz pole w VoucherForm? Dopisz je też tutaj.
+    -->
+    <form name="voucher" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="subject" />
+      <input type="text" name="kod" />
+      <input type="text" name="voucher" />
+      <input type="text" name="zabieg" />
+      <input type="text" name="kwota" />
+      <input type="text" name="dla_kogo" />
+      <input type="text" name="dostawa" />
+      <input type="text" name="adres" />
+      <input type="text" name="platnosc" />
+      <input type="text" name="do_zaplaty" />
+      <input type="text" name="imie_nazwisko" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefon" />
+      <input type="text" name="zgoda" />
+      <input type="text" name="bot-field" />
+    </form>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

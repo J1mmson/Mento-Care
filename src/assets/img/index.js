@@ -7,6 +7,10 @@ import about_480 from "./about-480.webp";
 import about_720 from "./about-720.webp";
 import about_1080 from "./about-1080.webp";
 import about_1365 from "./about-1365.webp";
+import kamila_480 from "./kamila-480.webp";
+import kamila_720 from "./kamila-720.webp";
+import kamila_1080 from "./kamila-1080.webp";
+import kamila_1365 from "./kamila-1365.webp";
 import logo_100 from "./logo-100.webp";
 import logo_160 from "./logo-160.webp";
 import logo_240 from "./logo-240.webp";
@@ -101,6 +105,13 @@ export const about = {
   height: 2048,
   src: about_1080,
   srcSet: `${about_480} 480w, ${about_720} 720w, ${about_1080} 1080w, ${about_1365} 1365w`,
+};
+
+export const kamila = {
+  width: 1365,
+  height: 2048,
+  src: kamila_1080,
+  srcSet: `${kamila_480} 480w, ${kamila_720} 720w, ${kamila_1080} 1080w, ${kamila_1365} 1365w`,
 };
 
 export const logo = {

@@ -2,7 +2,7 @@
  * Dane strukturalne (JSON-LD) dla Google – generowane z src/data/business.js
  * i wstrzykiwane do <head> podczas budowania strony (vite.config.js).
  */
-import { BUSINESS, FAQ, PRICE_LIST, SERVICE_TEXTS, minPrice } from "../data/business.js";
+import { BUSINESS, FAQ, PRICE_LIST, SERVICE_TEXTS, TEAM, minPrice } from "../data/business.js";
 
 export const SITE_URL = "https://mentocare.pl/";
 
@@ -54,6 +54,13 @@ export function buildSchema() {
       jobTitle: "Kosmetolog estetyczna",
       worksFor: { "@id": salonId },
     },
+    // zespół z sekcji „O nas” (bez osób oznaczonych draft)
+    employee: TEAM.filter((p) => !p.draft).map((p) => ({
+      "@type": "Person",
+      name: p.name,
+      jobTitle: p.roles[0],
+      worksFor: { "@id": salonId },
+    })),
     sameAs: [
       BUSINESS.facebook,
       BUSINESS.instagram,

@@ -1,6 +1,6 @@
 // Treści + zdjęcia. Same teksty i ceny edytujesz w ./business.js
 import * as img from "../assets/img";
-import { SERVICE_TEXTS } from "./business";
+import { SERVICE_TEXTS, TEAM } from "./business";
 
 export * from "./business";
 
@@ -20,6 +20,13 @@ const SERVICE_IMAGES = {
 };
 
 export const SERVICES = SERVICE_TEXTS.map((s) => ({ ...s, image: SERVICE_IMAGES[s.slug] }));
+
+// Osoby z `draft: true` widać tylko w podglądzie (npm run dev), nie na stronie.
+// Brak zdjęcia (np. przed `npm run images`) = elegancki zamiennik z logo.
+export const TEAM_MEMBERS = TEAM.filter((p) => !p.draft || import.meta.env.DEV).map((p) => ({
+  ...p,
+  image: img[p.photo] ?? null,
+}));
 
 export const METAMORPHOSES = [
   { before: img.przed1, after: img.po1 },

@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import { handleAnchorClick } from "./lib/scrollToSection";
 import Hero from "./sections/Hero";
 import Services from "./sections/Services";
-import AboutMe from "./sections/AboutMe";
+import AboutUs from "./sections/AboutMe";
 import Metamorphoses from "./sections/Metamorphoses";
 import Pricing from "./sections/Pricing";
 import Voucher from "./sections/Voucher";
@@ -29,7 +29,7 @@ export default function App() {
       <main>
         <Hero />
         <Services />
-        <AboutMe />
+        <AboutUs />
         <Metamorphoses />
         <Pricing />
         <Voucher />

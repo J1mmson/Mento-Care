@@ -33,6 +33,18 @@
     outline-offset: 3px;
   }
 
+  /* otwarte okno (src/components/Modal.jsx) – strona pod spodem się nie przewija */
+  html.modal-open {
+    overflow: hidden;
+  }
+
+  dialog[open] {
+    animation: modal-in 0.25s ease-out;
+  }
+  dialog[open]::backdrop {
+    animation: fade-in 0.25s ease-out;
+  }
+
   summary {
     list-style: none;
   }
@@ -72,8 +84,31 @@
   .section-title {
     @apply font-serif text-[40px] leading-[1.1] text-cream lg:text-[56px];
   }
+  /* formularze (voucher) – 16px, żeby iPhone nie powiększał strony przy wpisywaniu */
+  .field {
+    @apply block w-full rounded-[5px] border border-cream/25 bg-bgPrimary/70 px-4 py-3 text-[16px] font-light text-cream transition-colors placeholder:text-cream/35 hover:border-cream/45 focus:border-prime;
+  }
+  .field-label {
+    @apply mb-1.5 block text-[12px] font-normal uppercase tracking-[0.14em] text-cream/70;
+  }
+  /* relative: ukryte pole radio (sr-only) zostaje wewnątrz przewijanego okna – inaczej okno „skacze” */
+  .choice {
+    @apply relative flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-[5px] border border-cream/25 px-4 py-2.5 text-center text-[15px] leading-tight text-cream transition-colors hover:border-prime/70 has-[:checked]:border-prime has-[:checked]:bg-prime/10 has-[:checked]:text-prime has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-prime;
+  }
   .scroll-fade {
     -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
     mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
 }

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Img from "../components/Img";
+import ConsultationModal from "../components/ConsultationModal";
 import { BUSINESS, SERVICES } from "../data/content";
 
 // Na komputerze z myszą/touchpadem zabiegi są jednym slajdem przełączanym kółkiem.
@@ -14,6 +15,8 @@ export default function Services() {
   const [active, setActive] = useState(0);
   // zdjęcia, które już mogą się wczytać na desktopie (aktywne ± 1)
   const [shown, setShown] = useState(() => new Set([0, 1]));
+  // okno „Dowiedz się więcej” (konsultacja)
+  const [infoOpen, setInfoOpen] = useState(false);
 
   const go = useCallback((index) => {
     if (index < 0 || index >= COUNT) return false;
@@ -36,9 +39,11 @@ export default function Services() {
     let wasSnapped = false;
 
     const isSnapped = () => Math.abs(section.getBoundingClientRect().top) < 3;
+    // otwarte okno (konsultacja, voucher) – kółko i klawisze należą do okna, nie do slajdów
+    const modalOpen = () => document.documentElement.classList.contains("modal-open");
 
     const onWheel = (e) => {
-      if (!mq.matches || e.ctrlKey) return;
+      if (!mq.matches || e.ctrlKey || modalOpen()) return;
       if (!isSnapped()) {
         wasSnapped = false;
         return;
@@ -71,7 +76,7 @@ export default function Services() {
     };
 
     const onKey = (e) => {
-      if (!mq.matches || !isSnapped()) return;
+      if (!mq.matches || modalOpen() || !isSnapped()) return;
       if (e.target.closest?.("input, textarea, select, [contenteditable]")) return;
       const keys = { ArrowDown: 1, PageDown: 1, " ": 1, ArrowUp: -1, PageUp: -1 };
       let dir = keys[e.key];
@@ -137,14 +142,25 @@ export default function Services() {
                 {service.description}
               </p>
               <div className="mt-7 flex flex-wrap justify-center gap-3 desk:mt-10 desk:justify-start">
-                <a
-                  href={BUSINESS.booksyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline"
-                >
-                  Umów się na wizytę
-                </a>
+                {service.more ? (
+                  <button
+                    type="button"
+                    onClick={() => setInfoOpen(true)}
+                    aria-haspopup="dialog"
+                    className="btn-outline"
+                  >
+                    Dowiedz się więcej
+                  </button>
+                ) : (
+                  <a
+                    href={BUSINESS.booksyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline"
+                  >
+                    Umów się na wizytę
+                  </a>
+                )}
                 <a href="#cennik" className="btn-ghost">
                   Cennik
                 </a>
@@ -194,6 +210,8 @@ export default function Services() {
           ))}
         </ul>
       </nav>
+
+      <ConsultationModal open={infoOpen} onClose={() => setInfoOpen(false)} />
     </section>
   );
 }

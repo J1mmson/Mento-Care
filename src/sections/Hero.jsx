@@ -8,7 +8,7 @@ import { BUSINESS } from "../data/content";
 export default function Hero() {
   return (
     <section
-      id="o-nas"
+      id="start"
       aria-label="Mento Care – kosmetologia w Bochni"
       className="relative flex min-h-svh snap-start flex-col overflow-hidden lg:h-svh"
     >

@@ -9,7 +9,7 @@
  *                       2) npm run images   (za pierwszym razem: npm i -D sharp)
  *                       3) commit + push
  */
-import { mkdir, readdir, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -35,6 +35,8 @@ const IMAGES = {
   // zdjęcia z wyciętym tłem (przezroczystość)
   hero: ["glowna.png", [1365, 1080, 720, 480], 80],
   about: ["omnie.png", [1365, 1080, 720, 480], 80],
+  // zespół (sekcja „O nas”) – brakujący plik jest pomijany, a strona pokazuje zamiennik
+  kamila: ["kamila.png", [1365, 1080, 720, 480], 80],
   logo: ["og-image.png", [240, 160, 100], 90, { trim: true }],
 
   // tła usług
@@ -63,6 +65,7 @@ const IMAGES = {
   voucher: ["voucher.png", BG, 74],
 };
 
+const exists = (p) => access(p).then(() => true, () => false);
 const camel = (s) => s.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
 
 await rm(OUT, { recursive: true, force: true });
@@ -74,6 +77,10 @@ let total = 0;
 
 for (const [name, [file, widths, qWebp, opts = {}]] of Object.entries(IMAGES)) {
   const source = path.join(SRC, file);
+  if (!(await exists(source))) {
+    console.warn(`[images] pominięto „${name}” – brak pliku src/assets/${file}`);
+    continue;
+  }
   // trim: obcina przezroczyste marginesy (np. logo)
   const input = opts.trim ? await sharp(source).trim().toBuffer() : source;
   const meta = await sharp(input).metadata();

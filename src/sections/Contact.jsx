@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiClock, FiMapPin, FiNavigation, FiPhone, FiStar } from "react-icons/fi";
 import Social from "../components/Social";
-import { BUSINESS } from "../data/content";
+import { BUSINESS, VOUCHER } from "../data/content";
 
 function MapEmbed() {
   const [loaded, setLoaded] = useState(false);
@@ -123,7 +123,10 @@ export default function Contact() {
       <footer className="mt-6 flex flex-col items-center gap-1 border-t border-cream/10 py-5 text-center text-[12px] text-cream/50 lg:flex-row lg:justify-between lg:text-left">
         <p>
           © <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
-          {BUSINESS.name} · {BUSINESS.owner} · Kosmetologia estetyczna Bochnia
+          {BUSINESS.name} · {BUSINESS.owner} · Kosmetologia estetyczna Bochnia ·{" "}
+          <a href={VOUCHER.termsUrl} className="underline underline-offset-2 hover:text-prime">
+            Regulamin voucherów
+          </a>
         </p>
         <p>
           ul. {BUSINESS.street}, {BUSINESS.postalCode} {BUSINESS.city} · tel.{" "}

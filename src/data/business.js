@@ -40,6 +40,8 @@ export const SERVICE_TEXTS = [
     name: "Konsultacja kosmetologiczna",
     description:
       "To moment, w którym poznajemy Twoją skórę i jej potrzeby. Wspólnie wypełniamy kartę klienta, rozmawiamy o pielęgnacji, stylu życia i oczekiwaniach. Analiza skóry pozwala dobrać bezpieczne i skuteczne zabiegi oraz pielęgnację domową – dopasowaną tylko do Ciebie.",
+    // zamiast „Umów się” przycisk „Dowiedz się więcej” → okno z opisem (CONSULTATIONS niżej)
+    more: true,
   },
   {
     slug: "terapia-tradzikowa",
@@ -108,6 +110,111 @@ export const SERVICE_TEXTS = [
       "Wyjątkowe zabiegi tworzone z myślą o potrzebach Twojej skóry i chwili dla siebie. Łączą starannie dobrane etapy oczyszczania, masażu i odżywienia w jedną, spójną całość. To nie tylko pielęgnacja, ale też głęboki relaks i regeneracja dla ciała i zmysłów.",
   },
 ];
+
+/**
+ * Okno „Dowiedz się więcej” przy konsultacji (opisy z Booksy).
+ * price / withTreatment: liczby w zł (withTreatment = cena „od” z zabiegiem).
+ */
+export const CONSULTATIONS = {
+  intro:
+    "Każdą współpracę zaczynamy od konsultacji. Poznajemy Twoją skórę, styl życia i oczekiwania, a potem układamy plan zabiegów i pielęgnacji domowej. Wybierz konsultację dopasowaną do swojej skóry:",
+  types: [
+    {
+      name: "Konsultacja pielęgnacyjna",
+      price: 200,
+      duration: "ok. 45 min",
+      withTreatment: 250,
+      forWhom:
+        "Dla osób, które nie zmagają się z chorobami skóry, ale chcą dopasować pielęgnację do jej potrzeb.",
+      includes: [
+        "wywiad pielęgnacyjny i analiza stanu skóry",
+        "analiza badań laboratoryjnych",
+        "dobór podstawowej suplementacji",
+        "plan pielęgnacji domowej i zabiegów",
+        "indywidualna karta pielęgnacyjna wysłana e-mailem",
+      ],
+    },
+    {
+      name: "Konsultacja holistyczna",
+      price: 300,
+      duration: "ok. 1 h",
+      withTreatment: 350,
+      forWhom:
+        "Dla osób zmagających się z dolegliwościami skóry, takimi jak trądzik pospolity, trądzik różowaty, AZS czy łuszczyca.",
+      includes: [
+        "rozbudowany, szczegółowy wywiad",
+        "analiza pakietu badań laboratoryjnych (m.in. morfologia, ferrytyna, B12, TSH)",
+        "dobór suplementacji – podstawowej lub rozszerzonej",
+        "plan pielęgnacji domowej i zabiegów",
+      ],
+    },
+  ],
+  note: "Konsultację możesz połączyć z pierwszym zabiegiem. Jeśli masz wyniki badań krwi z ostatnich 3 miesięcy – zabierz je ze sobą.",
+};
+
+/**
+ * Zespół – sekcja „O nas” (kolejność = kolejność na stronie).
+ * photo: nazwa zdjęcia z src/assets/img – dodajesz je w scripts/optimize-images.mjs
+ *        (np. "kamila" = plik src/assets/kamila.png, potem `npm run images`).
+ * draft: true = osoba widoczna tylko w podglądzie (`npm run dev`), a NIE na stronie.
+ *        Gdy opis i zdjęcie są gotowe – usuń linijkę `draft: true`.
+ */
+export const TEAM = [
+  {
+    id: "faustyna",
+    name: "Faustyna Hojnor",
+    roles: ["Dyplomowana kosmetolog estetyczna", "Właścicielka Mento Care", "Studentka pielęgniarstwa"],
+    bio: "Z pasją łączę nowoczesną kosmetologię z holistycznym podejściem do skóry. Specjalizuję się w zabiegach iniekcyjnych, podkreślając naturalne piękno. Nieustannie rozwijam się zawodowo i medycznie, dbając o bezpieczeństwo i skuteczność terapii. Pracuję na certyfikowanych produktach, oferując komfort, precyzję i indywidualne podejście.",
+    photo: "about",
+  },
+  {
+    id: "kamila",
+    name: "Kamila Maj",
+    roles: ["Magister fizjoterapii", "Terapia napięć mięśniowych"],
+    bio: "Jestem fizjoterapeutką z tytułem magistra i specjalizuję się w pracy z napięciami mięśniowymi. Stawiam na indywidualne podejście, dokładną diagnostykę i skuteczną terapię. Łączę wiedzę medyczną z holistycznym spojrzeniem na pacjenta – dbam nie tylko o efekty, ale też o komfort i dobre samopoczucie podczas wizyty. Stale rozwijam swoje umiejętności, by proponować nowoczesne rozwiązania dopasowane do potrzeb każdej osoby.",
+    photo: "kamila",
+  },
+];
+
+/**
+ * Sprzedawca voucherów – firma, w ramach której działa Mento Care.
+ * Używane w regulaminie, w formularzu (administrator danych) i jako odbiorca przelewu.
+ */
+export const SELLER = {
+  name: "MENTO Barber Shop Dawid Szpilka",
+  address: "ul. Nad Babicą 2, 32-700 Bochnia",
+  nip: "7372230993",
+  regon: "520695175",
+  email: "kontakt@mentobarber.pl",
+};
+
+/**
+ * Voucher kupowany online (formularz w sekcji „Voucher”, zgłoszenia przez Netlify Forms)
+ * i regulamin pod adresem /regulamin-voucherow/ (generowany z tych danych – src/seo/regulamin.js).
+ * Zmieniasz zasady (ważność, opłaty)? Zmień też `termsDate`.
+ */
+export const VOUCHER = {
+  amounts: [200, 300, 500], // gotowe kwoty do wyboru (+ „inna kwota”)
+  minAmount: 100,
+  // dopłaty za formę przekazania vouchera (zł); e-mail (PDF) jest bez dopłat
+  printedFee: 10, // voucher papierowy – odbiór w gabinecie albo wysyłka
+  shippingFee: 15, // przesyłka na adres – doliczana do printedFee
+  accountHolder: SELLER.name,
+  bankAccount: "14 1240 5123 1111 0011 1042 3677",
+  blikPhone: "536 588 261", // przelew na telefon BLIK
+  validityMonths: 3, // ważność od daty zakupu
+  multiUse: true, // voucher kwotowy można wykorzystać w kilku częściach, do wyczerpania kwoty
+  paymentDays: 7, // tyle dni klient ma na wpłatę, potem zamówienie można anulować
+  termsUrl: "/regulamin-voucherow/",
+  termsDate: "5 listopada 2026", // data wersji regulaminu
+};
+
+/** „6 miesięcy”, „3 miesiące”, „1 miesiąc” */
+export const monthsLabel = (n) => {
+  if (n === 1) return "1 miesiąc";
+  const d = n % 10, dd = n % 100;
+  return `${n} ${d >= 2 && d <= 4 && (dd < 12 || dd > 14) ? "miesiące" : "miesięcy"}`;
+};
 
 /**
  * Cennik – zgodny z Booksy (stan: październik 2026).
@@ -283,7 +390,7 @@ export const FAQ = [
   },
   {
     q: "Czy mogę podarować zabieg w prezencie?",
-    a: "Tak – przygotujemy elegancki voucher na wybrany zabieg. Zadzwoń pod numer 505 204 943 lub napisz do nas na Instagramie.",
+    a: `Tak – voucher na dowolną kwotę lub na konkretny zabieg kupisz online w sekcji „Voucher” na tej stronie. Wyślemy go e-mailem, przygotujemy do odbioru w gabinecie albo wyślemy pocztą na wskazany adres. Voucher jest ważny ${monthsLabel(VOUCHER.validityMonths)} od daty zakupu${VOUCHER.multiUse ? ", a voucher na kwotę możesz wykorzystać na kilka wizyt" : ""}. Możesz też zadzwonić: 505 204 943.`,
   },
   {
     q: "Czy wykonujecie zabiegi dla mężczyzn?",
@@ -291,10 +398,10 @@ export const FAQ = [
   },
 ];
 
+// Menu: pierwsza połowa po lewej stronie logo, druga po prawej. Logo prowadzi na górę strony (#start).
 export const NAV = [
-  { id: "o-nas", label: "o nas" },
   { id: "zabiegi", label: "zabiegi" },
-  { id: "o-mnie", label: "o mnie" },
+  { id: "o-nas", label: "o nas" },
   { id: "metamorfozy", label: "metamorfozy" },
   { id: "cennik", label: "cennik" },
   { id: "voucher", label: "voucher" },

@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { FaInstagram } from "react-icons/fa6";
-import { FiPhone } from "react-icons/fi";
+import { FiGift, FiPhone } from "react-icons/fi";
 import Img from "../components/Img";
+import Modal from "../components/Modal";
+import VoucherForm, { TITLE_ID } from "../components/VoucherForm";
 import { voucher } from "../assets/img";
-import { BUSINESS } from "../data/content";
+import { BUSINESS, VOUCHER } from "../data/content";
 
 export default function Voucher() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section
       id="voucher"
@@ -37,20 +42,40 @@ export default function Voucher() {
           pielęgnacji. Dla niej. Dla niego. Dla każdego, kto zasługuje na
           moment tylko dla siebie.
         </p>
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center lg:mt-10 lg:justify-start">
-          <a href={`tel:${BUSINESS.phone}`} className="btn-solid">
-            <FiPhone aria-hidden="true" /> Zamów voucher: {BUSINESS.phoneDisplay}
+        <p className="mt-3 text-[14px] text-cream/70 lg:text-[15px]">
+          Na kwotę lub na wybrany zabieg · e-mailem, do odbioru w gabinecie lub wysyłką ·{" "}
+          <a href={VOUCHER.termsUrl} className="underline underline-offset-2 hover:text-prime">
+            regulamin
+          </a>
+        </p>
+        <div className="mt-7 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center lg:mt-9 lg:justify-start">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-haspopup="dialog"
+            className="btn-solid col-span-2"
+          >
+            <FiGift aria-hidden="true" /> Kup voucher online
+          </button>
+          <a href={`tel:${BUSINESS.phone}`} className="btn-outline px-4">
+            <FiPhone aria-hidden="true" />
+            <span className="sm:hidden">Zadzwoń</span>
+            <span className="hidden sm:inline">{BUSINESS.phoneDisplay}</span>
           </a>
           <a
             href={BUSINESS.instagramDm}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline"
+            className="btn-ghost px-4"
           >
-            <FaInstagram aria-hidden="true" /> Napisz na Instagramie
+            <FaInstagram aria-hidden="true" /> Instagram
           </a>
         </div>
       </div>
+
+      <Modal open={open} onClose={() => setOpen(false)} labelledBy={TITLE_ID}>
+        <VoucherForm onClose={() => setOpen(false)} />
+      </Modal>
     </section>
   );
 }

@@ -6,8 +6,9 @@ import { scrollToSection } from "../lib/scrollToSection";
 import { logo } from "../assets/img";
 import { BUSINESS, NAV } from "../data/content";
 
-const LEFT = NAV.slice(0, 4);
-const RIGHT = NAV.slice(4);
+const HALF = Math.ceil(NAV.length / 2);
+const LEFT = NAV.slice(0, HALF);
+const RIGHT = NAV.slice(HALF);
 
 function useActiveSection() {
   const [active, setActive] = useState(null);
@@ -99,8 +100,8 @@ export default function Navbar() {
         aria-label="Menu główne"
         className="mx-auto flex h-[76px] items-center justify-between px-5 lg:grid lg:h-[110px] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-6 xl:gap-8 lg:px-10 xl:px-[98px]"
       >
-        {/* Linki – lewa strona (desktop) */}
-        <ul className="hidden items-center gap-5 text-[13px] font-light uppercase tracking-[0.12em] lg:flex xl:gap-8 xl:text-[15px]">
+        {/* Linki – lewa strona (desktop). Mniejsze odstępy do 1536 px, żeby menu nie wchodziło na logo */}
+        <ul className="hidden items-center gap-4 text-[12px] font-light uppercase tracking-[0.1em] lg:flex xl:gap-5 xl:text-[13px] xl:tracking-[0.12em] 2xl:gap-8 2xl:text-[15px]">
           {LEFT.map((item) => (
             <li key={item.id}>
               <NavLink item={item} active={active} />
@@ -110,7 +111,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <a
-          href="#o-nas"
+          href="#start"
           className="relative z-20 shrink-0 lg:justify-self-center"
           aria-label="Mento Care – strona główna"
         >
@@ -124,8 +125,8 @@ export default function Navbar() {
         </a>
 
         {/* Linki – prawa strona + rezerwacja (desktop) */}
-        <div className="hidden items-center justify-end gap-5 text-[13px] font-light uppercase tracking-[0.12em] lg:flex xl:gap-8 xl:text-[15px]">
-          <ul className="flex items-center gap-5 xl:gap-8">
+        <div className="hidden items-center justify-end gap-4 text-[12px] font-light uppercase tracking-[0.1em] lg:flex xl:gap-5 xl:text-[13px] xl:tracking-[0.12em] 2xl:gap-8 2xl:text-[15px]">
+          <ul className="flex items-center gap-4 xl:gap-5 2xl:gap-8">
             {RIGHT.map((item) => (
               <li key={item.id}>
                 <NavLink item={item} active={active} />
