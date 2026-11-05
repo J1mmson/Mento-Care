@@ -43,13 +43,11 @@ function Portrait({ person }) {
   );
 }
 
-const pad = (n) => String(n).padStart(2, "0");
-
 /**
  * Telefon: każda osoba to osobny pełnoekranowy slajd (zdjęcie u góry, opis pod spodem).
  * Komputer: karta – zdjęcie w pionie po lewej, opis po prawej.
  */
-function PersonCard({ person, index, total }) {
+function PersonCard({ person, index }) {
   return (
     <article className="relative flex min-h-svh snap-start flex-col overflow-hidden bg-bgPrimary lg:min-h-0 lg:snap-align-none lg:flex-row lg:items-center lg:gap-7 lg:overflow-visible lg:bg-transparent xl:gap-9">
       {/* zdjęcie: na telefonie u góry ekranu (w normalnym układzie – tekst nigdy nie zasłania twarzy) */}
@@ -62,9 +60,7 @@ function PersonCard({ person, index, total }) {
       </div>
 
       <div className="relative z-10 -mt-[min(8svh,64px)] px-6 pb-[max(2rem,env(safe-area-inset-bottom))] text-center lg:mt-0 lg:min-w-0 lg:flex-1 lg:px-0 lg:pb-0 lg:text-left">
-        <p className="eyebrow lg:hidden">
-          Nasz zespół · {pad(index + 1)}/{pad(total)}
-        </p>
+        {index === 0 && <p className="eyebrow lg:hidden">O nas</p>}
         <h3 className="mt-1 text-[40px] leading-none text-cream lg:mt-0 lg:text-[34px] xl:text-[38px] 2xl:text-[44px]">
           {person.name}
         </h3>
@@ -97,7 +93,7 @@ function Team({ team }) {
       />
 
       <header className="lg:relative lg:mx-auto lg:flex lg:w-full lg:max-w-[1500px] lg:items-end lg:justify-between lg:gap-6">
-        {/* na telefonie nagłówek tylko dla czytników ekranu – każdy slajd ma własny podpis */}
+        {/* na telefonie nagłówek tylko dla czytników ekranu – podpis „O nas” jest nad pierwszą osobą */}
         <div className="sr-only lg:not-sr-only">
           <p className="eyebrow">O nas</p>
           <h2 id="o-nas-tytul" className="section-title mt-2">
@@ -109,7 +105,7 @@ function Team({ team }) {
 
       <div className="lg:relative lg:mx-auto lg:mt-10 lg:grid lg:w-full lg:max-w-[1500px] lg:grid-cols-2 lg:gap-10 xl:gap-16">
         {team.map((person, i) => (
-          <PersonCard key={person.id} person={person} index={i} total={team.length} />
+          <PersonCard key={person.id} person={person} index={i} />
         ))}
       </div>
     </section>
