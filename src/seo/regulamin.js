@@ -25,13 +25,13 @@ export function buildRegulamin() {
       `Regulamin określa zasady sprzedaży voucherów podarunkowych na zabiegi w gabinecie ${esc(BUSINESS.fullName)} (ul. ${studio}) za pośrednictwem formularza na stronie <a href="${SITE_URL}">${SITE_URL.replace(/^https?:\/\/|\/$/g, "")}</a> oraz zasady korzystania z voucherów.`,
       `Sprzedawcą jest <strong>${seller}</strong>, NIP ${esc(SELLER.nip)}, REGON ${esc(SELLER.regon)}, e-mail: ${mail}, tel. 536 588 261 („Sprzedawca”). Gabinet Mento Care działa w ramach działalności Sprzedawcy.`,
       `<strong>Klient</strong> – osoba składająca zamówienie. <strong>Konsument</strong> – Klient będący osobą fizyczną, który kupuje voucher w celu niezwiązanym bezpośrednio z działalnością gospodarczą lub zawodową. Postanowienia dotyczące Konsumentów stosuje się także do przedsiębiorców prowadzących jednoosobową działalność, jeżeli zakup nie ma dla nich charakteru zawodowego.`,
-      `<strong>Voucher</strong> – bon uprawniający okaziciela do skorzystania z zabiegów w gabinecie Mento Care do określonej kwoty (voucher kwotowy) albo na wskazany zabieg (voucher na zabieg), oznaczony unikalnym numerem (np. MC-7K3QX9).`,
+      `<strong>Voucher</strong> – bon uprawniający okaziciela do skorzystania z zabiegów w gabinecie Mento Care do określonej kwoty (voucher kwotowy) albo na wskazany zabieg (voucher na zabieg), oznaczony unikalnym numerem (np. MC-7K3Q).`,
       `Do złożenia zamówienia potrzebne jest urządzenie z dostępem do internetu, aktualna przeglądarka internetowa i aktywny adres e-mail. Zabronione jest przekazywanie za pomocą formularza treści o charakterze bezprawnym.`,
     ])),
 
     section(2, "Zamówienie i cena", list([
       `Klient wybiera rodzaj vouchera, sposób jego przekazania i płatności, podaje swoje dane, akceptuje Regulamin i wysyła formularz przyciskiem „Zamawiam z obowiązkiem zapłaty”.`,
-      `Po wysłaniu formularza Klient widzi na ekranie numer vouchera oraz dane do płatności. Umowa zostaje zawarta z chwilą wysłania zamówienia. Sprzedawca potwierdza zawarcie umowy wiadomością e-mail wysłaną na adres podany w zamówieniu.`,
+      `Po wysłaniu formularza Klient widzi na ekranie numer vouchera oraz dane do płatności. Umowa zostaje zawarta z chwilą wysłania zamówienia. Potwierdzenie zawarcia umowy wraz z danymi do płatności Sprzedawca wysyła automatycznie e-mailem na adres podany w zamówieniu.`,
       `Ceny podane są w złotych polskich i zawierają podatki. Do wartości vouchera doliczana jest opłata za formę przekazania:<ul>
         <li>e-mailem (plik PDF do samodzielnego wydruku) – bez dopłat,</li>
         <li>odbiór w gabinecie (voucher papierowy) – ${zl(V.printedFee)},</li>
@@ -42,13 +42,14 @@ export function buildRegulamin() {
 
     section(3, "Płatność", list([
       `Płatności dokonuje się przelewem na rachunek bankowy Sprzedawcy nr <strong>${esc(V.bankAccount)}</strong>${V.blikPhone ? ` albo przelewem na telefon BLIK na numer <strong>${esc(V.blikPhone)}</strong>` : ""}, podając w tytule numer vouchera.`,
-      `Zamówienie należy opłacić w ciągu ${V.paymentDays} dni od jego złożenia. Zamówienie nieopłacone w tym terminie może zostać anulowane – Sprzedawca poinformuje o tym Klienta e-mailem.`,
+      `Zamówienie należy opłacić w ciągu ${V.paymentDays} dni od jego złożenia. Zamówienie nieopłacone w tym terminie może zostać anulowane – Sprzedawca poinformuje o tym Klienta e-mailem, a voucher z anulowanego zamówienia jest nieważny.`,
       `Sprzedawca wystawia dowód zakupu zgodnie z obowiązującymi przepisami, a na życzenie Klienta – fakturę.`,
     ])),
 
     section(4, "Przekazanie vouchera", list([
-      `Sprzedawca przygotowuje voucher po zaksięgowaniu wpłaty:<ul>
-        <li>e-mailem – przesyła plik PDF na adres podany w zamówieniu w ciągu 2 dni roboczych,</li>
+      `Voucher przekazywany e-mailem Sprzedawca wysyła automatycznie, niezwłocznie po złożeniu zamówienia, jako plik PDF na adres podany w zamówieniu. Do czasu zaksięgowania wpłaty voucher zawiera dopisek „Voucher aktywny po zaksięgowaniu wpłaty”.`,
+      `Sprzedawca potwierdza zaksięgowanie wpłaty niezwłocznie, nie później niż w ciągu 2 dni roboczych od jej wpływu. Klient otrzymuje wtedy e-mail z informacją, że voucher jest aktywny, a przy przekazaniu e-mailem – także plik PDF vouchera bez dopisku o płatności.`,
+      `Voucher papierowy Sprzedawca przygotowuje po zaksięgowaniu wpłaty:<ul>
         <li>odbiór w gabinecie – voucher czeka w gabinecie przy ul. ${studio} od następnego dnia roboczego, w godzinach otwarcia,</li>
         <li>wysyłka – Sprzedawca nadaje przesyłkę na adres w Polsce podany w zamówieniu w ciągu 3 dni roboczych.</li>
       </ul>`,
@@ -56,7 +57,7 @@ export function buildRegulamin() {
     ])),
 
     section(5, "Korzystanie z vouchera", list([
-      `Voucher jest ważny <strong>${validity} od daty zakupu</strong> (zaksięgowania wpłaty). Data ważności jest podana na voucherze.`,
+      `Voucher jest ważny <strong>${validity} od daty zakupu</strong> (złożenia zamówienia). Data ważności jest podana na voucherze. Z vouchera można korzystać po zaksięgowaniu wpłaty – voucher z nieopłaconego zamówienia jest nieważny.`,
       `Voucher jest na okaziciela – może z niego skorzystać osoba obdarowana. Imię wpisane na voucherze ma charakter okolicznościowy. Numer vouchera należy chronić przed osobami niepowołanymi.`,
       `Wizytę z voucherem należy umówić telefonicznie (${esc(BUSINESS.phoneDisplay)}) lub przez Booksy, informując o voucherze, i okazać voucher (wydruk, plik lub numer) w gabinecie.`,
       V.multiUse

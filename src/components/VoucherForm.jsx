@@ -10,10 +10,11 @@ import { BUSINESS, PRICE_LIST, SELLER, VOUCHER, formatPrice, monthsLabel } from 
 export const FORM_NAME = "voucher";
 export const TITLE_ID = "voucher-zamowienie-tytul"; // nagłówek okna (aria-labelledby)
 
-// Numer vouchera, np. MC-7K3QX9 (bez liter/cyfr łatwych do pomylenia: 0/O, 1/I/L)
+// Numer vouchera, np. MC-7K3Q – 4 znaki (bez liter/cyfr łatwych do pomylenia: 0/O, 1/I/L).
+// Ok. 920 tys. kombinacji – przy wpisywaniu do listy sprawdź, czy numer się nie powtarza.
 const CODE_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const makeCode = () =>
-  "MC-" + Array.from(crypto.getRandomValues(new Uint8Array(6)), (b) => CODE_CHARS[b % CODE_CHARS.length]).join("");
+  "MC-" + Array.from(crypto.getRandomValues(new Uint8Array(4)), (b) => CODE_CHARS[b % CODE_CHARS.length]).join("");
 
 const zl = (n) => `${Number(n).toLocaleString("pl-PL").replace(/\s/g, "\u00a0")}\u00a0zł`;
 
@@ -33,7 +34,7 @@ const PAYMENTS = [
 
 // Forma przekazania + dopłata (VOUCHER.printedFee / shippingFee w business.js)
 const DELIVERY = [
-  { id: "email", label: "E-mailem", hint: "PDF do wydruku · bez dopłat", fee: 0 },
+  { id: "email", label: "E-mailem", hint: "PDF od razu na e-mail · bez dopłat", fee: 0 },
   {
     id: "odbior",
     label: "Odbiór w gabinecie",
@@ -152,7 +153,7 @@ function Confirmation({ order, onClose, onAgain }) {
               <div key={label} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
                 <dt className="text-cream/60">{label}</dt>
                 <dd className="flex items-center gap-3 text-right text-cream">
-                  <span className="break-all">{value}</span>
+                  <span className="break-words">{value}</span>
                   {copy && <CopyButton text={copy} label={label} />}
                 </dd>
               </div>
@@ -162,14 +163,15 @@ function Confirmation({ order, onClose, onAgain }) {
       )}
 
       <p className="mt-5 text-[15px] leading-relaxed text-cream/85">
-        {order.delivery === "email" && `Po zaksięgowaniu wpłaty wyślemy voucher na ${order.email}.`}
+        {order.delivery === "email" &&
+          `Voucher w PDF za chwilę przyjdzie na ${order.email} – możesz go od razu przekazać. Będzie aktywny po zaksięgowaniu wpłaty; wtedy wyślemy też jego wersję bez dopisku o płatności.`}
         {order.delivery === "odbior" &&
           `Po zaksięgowaniu wpłaty voucher będzie czekał na Ciebie w gabinecie – ul. ${BUSINESS.street}, ${BUSINESS.city}.`}
         {order.delivery === "wysylka" && `Po zaksięgowaniu wpłaty wyślemy voucher na adres: ${order.address}.`}
       </p>
       <p className="mt-2 text-[14px] leading-relaxed text-cream/70">
-        Potwierdzenie zamówienia wyślemy też e-mailem. Zachowaj numer vouchera – po nim odnajdziemy Twoje
-        zamówienie. Pytania?{" "}
+        Potwierdzenie zamówienia przyjdzie e-mailem w ciągu kilku minut – jeśli go nie widzisz, zajrzyj do folderu
+        Spam lub Oferty. Zachowaj numer vouchera – po nim odnajdziemy Twoje zamówienie. Pytania?{" "}
         <a href={`tel:${BUSINESS.phone}`} className="text-prime underline underline-offset-4">
           Zadzwoń: {BUSINESS.phoneDisplay}
         </a>
@@ -500,7 +502,10 @@ export default function VoucherForm({ onClose }) {
       )}
 
       <p className="mt-4 text-[13px] leading-relaxed text-cream/55">
-        Po wysłaniu formularza zobaczysz dane do płatności. Voucher przygotujemy po zaksięgowaniu wpłaty.
+        Po wysłaniu formularza zobaczysz dane do płatności.{" "}
+        {delivery === "email"
+          ? "Voucher w PDF wyślemy od razu e-mailem – stanie się aktywny po zaksięgowaniu wpłaty."
+          : "Voucher papierowy przygotujemy po zaksięgowaniu wpłaty."}
       </p>
     </form>
   );

@@ -206,7 +206,7 @@ export const VOUCHER = {
   multiUse: true, // voucher kwotowy można wykorzystać w kilku częściach, do wyczerpania kwoty
   paymentDays: 7, // tyle dni klient ma na wpłatę, potem zamówienie można anulować
   termsUrl: "/regulamin-voucherow/",
-  termsDate: "5 listopada 2026", // data wersji regulaminu
+  termsDate: "8 listopada 2026", // data wersji regulaminu
 };
 
 /** „6 miesięcy”, „3 miesiące”, „1 miesiąc” */
@@ -390,7 +390,7 @@ export const FAQ = [
   },
   {
     q: "Czy mogę podarować zabieg w prezencie?",
-    a: `Tak – voucher na dowolną kwotę lub na konkretny zabieg kupisz online w sekcji „Voucher” na tej stronie. Wyślemy go e-mailem, przygotujemy do odbioru w gabinecie albo wyślemy pocztą na wskazany adres. Voucher jest ważny ${monthsLabel(VOUCHER.validityMonths)} od daty zakupu${VOUCHER.multiUse ? ", a voucher na kwotę możesz wykorzystać na kilka wizyt" : ""}. Możesz też zadzwonić: 505 204 943.`,
+    a: `Tak – voucher na dowolną kwotę lub na konkretny zabieg kupisz online w sekcji „Voucher” na tej stronie. Voucher w PDF wyślemy e-mailem od razu po złożeniu zamówienia (stanie się aktywny po zaksięgowaniu wpłaty), a voucher papierowy po wpłacie przygotujemy do odbioru w gabinecie albo wyślemy pocztą na wskazany adres. Voucher jest ważny ${monthsLabel(VOUCHER.validityMonths)} od daty zakupu${VOUCHER.multiUse ? ", a voucher na kwotę możesz wykorzystać na kilka wizyt" : ""}. Możesz też zadzwonić: 505 204 943.`,
   },
   {
     q: "Czy wykonujecie zabiegi dla mężczyzn?",

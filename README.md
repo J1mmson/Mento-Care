@@ -29,9 +29,9 @@ Regulamin sprzedaży voucherów (`/regulamin-voucherow/`) generuje się automaty
 
 ### Obsługa zamówienia krok po kroku
 
-1. Przychodzi mail z Netlify, w temacie numer vouchera, np. „Voucher MC-7K3QX9 – 310 zł – Anna Kowalska”.
+1. Przychodzi mail z Netlify, w temacie numer vouchera, np. „Voucher MC-7K3Q – 310 zł – Anna Kowalska”.
 2. Odpowiedz na niego (trafi prosto do kupującego) – to potwierdzenie zawarcia umowy, np.:
-   > Dzień dobry, potwierdzamy zamówienie vouchera MC-7K3QX9 (310 zł). Po zaksięgowaniu wpłaty przygotujemy voucher.
+   > Dzień dobry, potwierdzamy zamówienie vouchera MC-7K3Q (310 zł). Po zaksięgowaniu wpłaty przygotujemy voucher.
    > Regulamin: https://mentocare.pl/regulamin-voucherow/ – Mento Care
 3. Gdy wpłata z tym numerem w tytule wpłynie: wyślij PDF / przygotuj voucher do odbioru / nadaj przesyłkę.
    Na voucherze wpisz ten sam numer i datę ważności.
