@@ -45,7 +45,7 @@ const IMAGES = {
   "uslugi-stymulatory": ["stymulator.jpg", BG, 70],
   "uslugi-mezo-iglowa": ["iglowa.jpg", BG, 70],
   "uslugi-mezo-mikroiglowa": ["mikro.jpg", BG, 70],
-  "uslugi-btx": ["servicesPhotos/btx.png", BG, 70],
+  "uslugi-btx": ["btx.jpg", BG, 70], // pionowe – kadr na komputerze: imagePosition w business.js
   "uslugi-peeling": ["peeling.jpg", BG, 70],
   "uslugi-led": ["servicesPhotos/lampa-led.png", BG, 70],
   "uslugi-dla-niego": ["servicesPhotos/dla-niego.png", BG, 70],

@@ -70,6 +70,7 @@ export const SERVICE_TEXTS = [
   {
     slug: "btx",
     name: "BTX",
+    imagePosition: "50% 78%", // zdjęcie pionowe – na komputerze widać pas z twarzą i dłońmi
     description:
       "Szybki i mało inwazyjny sposób na wygładzenie zmarszczek mimicznych. Zabieg relaksuje wybrane mięśnie twarzy, dzięki czemu cera wygląda na młodszą i wypoczętą. Efekt jest naturalny i zauważalny już po kilku dniach. Idealne rozwiązanie na lwią zmarszczkę, kurze łapki i poziome linie na czole.",
   },

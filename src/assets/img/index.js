@@ -31,7 +31,7 @@ import uslugiMezoMikroiglowa_1280 from "./uslugi-mezo-mikroiglowa-1280.webp";
 import uslugiMezoMikroiglowa_1920 from "./uslugi-mezo-mikroiglowa-1920.webp";
 import uslugiBtx_768 from "./uslugi-btx-768.webp";
 import uslugiBtx_1280 from "./uslugi-btx-1280.webp";
-import uslugiBtx_1920 from "./uslugi-btx-1920.webp";
+import uslugiBtx_1365 from "./uslugi-btx-1365.webp";
 import uslugiPeeling_768 from "./uslugi-peeling-768.webp";
 import uslugiPeeling_1280 from "./uslugi-peeling-1280.webp";
 import uslugiPeeling_1920 from "./uslugi-peeling-1920.webp";
@@ -157,10 +157,10 @@ export const uslugiMezoMikroiglowa = {
 };
 
 export const uslugiBtx = {
-  width: 1920,
-  height: 1080,
+  width: 1365,
+  height: 2048,
   src: uslugiBtx_1280,
-  srcSet: `${uslugiBtx_768} 768w, ${uslugiBtx_1280} 1280w, ${uslugiBtx_1920} 1920w`,
+  srcSet: `${uslugiBtx_768} 768w, ${uslugiBtx_1280} 1280w, ${uslugiBtx_1365} 1365w`,
 };
 
 export const uslugiPeeling = {

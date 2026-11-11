@@ -120,6 +120,7 @@ export default function Services() {
                 alt={`${service.name} – Mento Care Bochnia`}
                 sizes="100vw"
                 className="h-full w-full object-cover opacity-45"
+                style={service.imagePosition ? { objectPosition: service.imagePosition } : undefined}
               />
             </div>
             <div
