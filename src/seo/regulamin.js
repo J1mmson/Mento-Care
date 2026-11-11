@@ -25,7 +25,7 @@ export function buildRegulamin() {
       `Regulamin określa zasady sprzedaży voucherów podarunkowych na zabiegi w gabinecie ${esc(BUSINESS.fullName)} (ul. ${studio}) za pośrednictwem formularza na stronie <a href="${SITE_URL}">${SITE_URL.replace(/^https?:\/\/|\/$/g, "")}</a> oraz zasady korzystania z voucherów.`,
       `Sprzedawcą jest <strong>${seller}</strong>, NIP ${esc(SELLER.nip)}, REGON ${esc(SELLER.regon)}, e-mail: ${mail}, tel. 536 588 261 („Sprzedawca”). Gabinet Mento Care działa w ramach działalności Sprzedawcy.`,
       `<strong>Klient</strong> – osoba składająca zamówienie. <strong>Konsument</strong> – Klient będący osobą fizyczną, który kupuje voucher w celu niezwiązanym bezpośrednio z działalnością gospodarczą lub zawodową. Postanowienia dotyczące Konsumentów stosuje się także do przedsiębiorców prowadzących jednoosobową działalność, jeżeli zakup nie ma dla nich charakteru zawodowego.`,
-      `<strong>Voucher</strong> – bon uprawniający okaziciela do skorzystania z zabiegów w gabinecie Mento Care do określonej kwoty (voucher kwotowy) albo na wskazany zabieg (voucher na zabieg), oznaczony unikalnym numerem (np. MC-7K3Q).`,
+      `<strong>Voucher</strong> – bon uprawniający okaziciela do skorzystania z zabiegów w gabinecie Mento Care do określonej kwoty (voucher kwotowy) albo na wskazany zabieg (voucher na zabieg), oznaczony unikalnym, 4-znakowym numerem (np. 7K3Q).`,
       `Do złożenia zamówienia potrzebne jest urządzenie z dostępem do internetu, aktualna przeglądarka internetowa i aktywny adres e-mail. Zabronione jest przekazywanie za pomocą formularza treści o charakterze bezprawnym.`,
     ])),
 
@@ -47,8 +47,8 @@ export function buildRegulamin() {
     ])),
 
     section(4, "Przekazanie vouchera", list([
-      `Voucher przekazywany e-mailem Sprzedawca wysyła automatycznie, niezwłocznie po złożeniu zamówienia, jako plik PDF na adres podany w zamówieniu. Do czasu zaksięgowania wpłaty voucher zawiera dopisek „Voucher aktywny po zaksięgowaniu wpłaty”.`,
-      `Sprzedawca potwierdza zaksięgowanie wpłaty niezwłocznie, nie później niż w ciągu 2 dni roboczych od jej wpływu. Klient otrzymuje wtedy e-mail z informacją, że voucher jest aktywny, a przy przekazaniu e-mailem – także plik PDF vouchera bez dopisku o płatności.`,
+      `Voucher przekazywany e-mailem Sprzedawca wysyła automatycznie, niezwłocznie po złożeniu zamówienia, jako plik PDF na adres podany w zamówieniu. Voucher staje się aktywny – i może zostać wykorzystany – po zaksięgowaniu wpłaty.`,
+      `Sprzedawca potwierdza zaksięgowanie wpłaty niezwłocznie, nie później niż w ciągu 2 dni roboczych od jej wpływu. Klient otrzymuje wtedy e-mail z informacją, że voucher jest aktywny.`,
       `Voucher papierowy Sprzedawca przygotowuje po zaksięgowaniu wpłaty:<ul>
         <li>odbiór w gabinecie – voucher czeka w gabinecie przy ul. ${studio} od następnego dnia roboczego, w godzinach otwarcia,</li>
         <li>wysyłka – Sprzedawca nadaje przesyłkę na adres w Polsce podany w zamówieniu w ciągu 3 dni roboczych.</li>

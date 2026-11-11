@@ -206,7 +206,7 @@ export const VOUCHER = {
   multiUse: true, // voucher kwotowy można wykorzystać w kilku częściach, do wyczerpania kwoty
   paymentDays: 7, // tyle dni klient ma na wpłatę, potem zamówienie można anulować
   termsUrl: "/regulamin-voucherow/",
-  termsDate: "8 listopada 2026", // data wersji regulaminu
+  termsDate: "11 listopada 2026", // data wersji regulaminu
 };
 
 /** „6 miesięcy”, „3 miesiące”, „1 miesiąc” */
