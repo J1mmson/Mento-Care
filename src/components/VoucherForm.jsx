@@ -258,6 +258,16 @@ export default function VoucherForm({ onClose }) {
           body: new URLSearchParams(data).toString(),
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (VOUCHER.orderHookUrl) {
+          // kopia do arkusza voucherów (Apps Script) – wiersz w arkuszu + e-mail z voucherem do kupującego.
+          // „no-cors”: odpowiedzi nie czytamy, a potwierdzenie na ekranie nie czeka na arkusz.
+          fetch(VOUCHER.orderHookUrl, {
+            method: "POST",
+            mode: "no-cors",
+            keepalive: true,
+            body: new URLSearchParams(data),
+          }).catch((err) => console.error("[voucher] arkusz", err));
+        }
       }
       setOrder({ code, label, total, fee: deliveryOption.fee, name, email, delivery, payment, address });
       setStatus("idle");

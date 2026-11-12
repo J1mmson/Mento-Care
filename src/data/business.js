@@ -208,6 +208,11 @@ export const VOUCHER = {
   paymentDays: 7, // tyle dni klient ma na wpłatę, potem zamówienie można anulować
   termsUrl: "/regulamin-voucherow/",
   termsDate: "11 listopada 2026", // data wersji regulaminu
+  // Automat voucherów (Google Apps Script w arkuszu Mento-Care-vouchery na koncie mentocarebochnia):
+  // formularz wysyła tu kopię każdego zamówienia → wiersz w arkuszu + e-mail z voucherem do kupującego.
+  // Adres = „Wdróż → Zarządzaj wdrożeniami” w Apps Script (+ ?token= z CONFIG w Code.gs). Puste = wyłączone.
+  orderHookUrl:
+    "https://script.google.com/macros/s/AKfycbzzOqqeHkaSzU1WNbDfTrZ2_d_vT9_6sldRCnwQIywbNl0RWhxu4RJuDUHbMViO-OGE/exec?token=mc-057h6hze498971wxv8nq",
 };
 
 /** „6 miesięcy”, „3 miesiące”, „1 miesiąc” */
