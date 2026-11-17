@@ -63,6 +63,9 @@ const IMAGES = {
 
   cennik: ["cennik.png", [960, 720, 480], 75],
   voucher: ["voucher.png", BG, 74],
+  // vouchery: zdjęcie opakowania (papierowy) i podgląd vouchera PDF (e-mail)
+  "voucher-pudelko": ["voucher-pudelko.jpg", [1600, 1080, 720], 80],
+  "voucher-pdf": ["voucher-pdf.jpg", [1200, 800, 480], 82],
 };
 
 const exists = (p) => access(p).then(() => true, () => false);

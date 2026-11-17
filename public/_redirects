@@ -1,0 +1,9 @@
+# Zabezpieczenie: gdyby przy publikacji nie powstały pliki podstron (scripts/prerender.mjs),
+# Netlify pokaże stronę główną, a aplikacja sama wyświetli właściwą podstronę.
+# Gdy plik podstrony istnieje (normalnie), te reguły są pomijane.
+/zabiegi/      /index.html  200
+/o-nas/        /index.html  200
+/metamorfozy/  /index.html  200
+/cennik/       /index.html  200
+/vouchery/     /index.html  200
+/kontakt/      /index.html  200

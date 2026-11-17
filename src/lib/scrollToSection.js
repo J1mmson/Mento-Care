@@ -6,6 +6,8 @@
  * przewinięcie, gdy snap jest włączony. Dlatego na czas skoku wyłączamy snap,
  * a po dotarciu na miejsce włączamy go z powrotem.
  */
+import { pathForSection } from "../data/pages.js";
+
 let restoreTimer = 0;
 let cleanup = null;
 
@@ -55,12 +57,33 @@ export function scrollToSection(id) {
   return true;
 }
 
-/** Obsługa wszystkich linków typu href="#sekcja" na stronie. */
+/** Przewija do sekcji, a gdy jej nie ma na tej podstronie – przechodzi na podstronę, na której jest. */
+export function goToSection(id) {
+  if (scrollToSection(id)) return;
+  const path = pathForSection(id);
+  if (path) window.location.href = path;
+}
+
+/**
+ * Obsługa linków na stronie:
+ * • href="#sekcja" – przewija; gdy sekcji nie ma na tej podstronie, otwiera właściwą podstronę,
+ * • href="/cennik/" data-section="cennik" (menu) – na stronie głównej przewija do sekcji,
+ *   na podstronach działa jak zwykły link.
+ */
 export function handleAnchorClick(e) {
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-  const link = e.target.closest?.('a[href^="#"]');
+  const link = e.target.closest?.('a[href^="#"], a[data-section]');
   if (!link) return;
-  const id = decodeURIComponent(link.getAttribute("href").slice(1));
+  const href = link.getAttribute("href") || "";
+  const id = link.dataset.section || decodeURIComponent(href.slice(1));
   if (!id) return;
-  if (scrollToSection(id)) e.preventDefault();
+  if (scrollToSection(id)) {
+    e.preventDefault();
+    return;
+  }
+  const path = href.startsWith("#") && pathForSection(id);
+  if (path) {
+    e.preventDefault();
+    window.location.href = path;
+  }
 }

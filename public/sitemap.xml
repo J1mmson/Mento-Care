@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mentocare.pl/</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://mentocare.pl/zabiegi/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://mentocare.pl/o-nas/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://mentocare.pl/metamorfozy/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://mentocare.pl/cennik/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://mentocare.pl/vouchery/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://mentocare.pl/kontakt/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://mentocare.pl/regulamin-voucherow/</loc>
+    <lastmod>2026-11-16</lastmod>
   </url>
 </urlset>

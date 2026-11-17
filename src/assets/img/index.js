@@ -92,6 +92,12 @@ import cennik_960 from "./cennik-960.webp";
 import voucher_768 from "./voucher-768.webp";
 import voucher_1280 from "./voucher-1280.webp";
 import voucher_1920 from "./voucher-1920.webp";
+import voucherPudelko_720 from "./voucher-pudelko-720.webp";
+import voucherPudelko_1080 from "./voucher-pudelko-1080.webp";
+import voucherPudelko_1600 from "./voucher-pudelko-1600.webp";
+import voucherPdf_480 from "./voucher-pdf-480.webp";
+import voucherPdf_800 from "./voucher-pdf-800.webp";
+import voucherPdf_1200 from "./voucher-pdf-1200.webp";
 
 export const hero = {
   width: 1365,
@@ -301,4 +307,18 @@ export const voucher = {
   height: 1080,
   src: voucher_1280,
   srcSet: `${voucher_768} 768w, ${voucher_1280} 1280w, ${voucher_1920} 1920w`,
+};
+
+export const voucherPudelko = {
+  width: 1600,
+  height: 800,
+  src: voucherPudelko_1080,
+  srcSet: `${voucherPudelko_720} 720w, ${voucherPudelko_1080} 1080w, ${voucherPudelko_1600} 1600w`,
+};
+
+export const voucherPdf = {
+  width: 1200,
+  height: 845,
+  src: voucherPdf_1200,
+  srcSet: `${voucherPdf_480} 480w, ${voucherPdf_800} 800w, ${voucherPdf_1200} 1200w`,
 };

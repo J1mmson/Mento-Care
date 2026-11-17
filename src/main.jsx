@@ -2,11 +2,14 @@ import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+import { pageForPath } from "./data/pages.js";
 
 const container = document.getElementById("root");
+// podstrona (np. /vouchery/) – te same sekcje co w HTML wygenerowanym przez scripts/prerender.mjs
+const page = pageForPath(window.location.pathname);
 const app = (
   <StrictMode>
-    <App />
+    <App page={page} />
   </StrictMode>
 );
 

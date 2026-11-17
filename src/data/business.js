@@ -405,11 +405,12 @@ export const FAQ = [
 ];
 
 // Menu: pierwsza połowa po lewej stronie logo, druga po prawej. Logo prowadzi na górę strony (#start).
+// Menu: id = sekcja na stronie głównej, path = podstrona (src/data/pages.js)
 export const NAV = [
-  { id: "zabiegi", label: "zabiegi" },
-  { id: "o-nas", label: "o nas" },
-  { id: "metamorfozy", label: "metamorfozy" },
-  { id: "cennik", label: "cennik" },
-  { id: "voucher", label: "voucher" },
-  { id: "kontakt", label: "kontakt" },
+  { id: "zabiegi", label: "zabiegi", path: "/zabiegi/" },
+  { id: "o-nas", label: "o nas", path: "/o-nas/" },
+  { id: "metamorfozy", label: "metamorfozy", path: "/metamorfozy/" },
+  { id: "cennik", label: "cennik", path: "/cennik/" },
+  { id: "voucher", label: "voucher", path: "/vouchery/" },
+  { id: "kontakt", label: "kontakt", path: "/kontakt/" },
 ];

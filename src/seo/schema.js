@@ -118,3 +118,46 @@ export function buildSchema() {
 
   return { "@context": "https://schema.org", "@graph": [salon, website, faq] };
 }
+
+/** Podstrona (src/data/pages.js): opis strony + okruszki „Mento Care › Vouchery” dla Google. */
+export function buildPageSchema(page) {
+  const url = new URL(page.path, SITE_URL).href;
+  const salonId = `${SITE_URL}#salon`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: page.title,
+        description: page.description,
+        inLanguage: "pl-PL",
+        isPartOf: { "@type": "WebSite", "@id": `${SITE_URL}#website`, url: SITE_URL, name: "Mento Care" },
+        about: {
+          "@type": "BeautySalon",
+          "@id": salonId,
+          name: "Mento Care - Kosmetologia Bochnia",
+          url: SITE_URL,
+          telephone: BUSINESS.phone,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: BUSINESS.street,
+            addressLocality: BUSINESS.city,
+            postalCode: BUSINESS.postalCode,
+            addressCountry: "PL",
+          },
+        },
+        breadcrumb: { "@id": `${url}#okruszki` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#okruszki`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Mento Care", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: page.crumb, item: url },
+        ],
+      },
+    ],
+  };
+}

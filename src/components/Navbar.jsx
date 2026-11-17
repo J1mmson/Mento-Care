@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { FiMenu, FiPhone, FiX } from "react-icons/fi";
+import { FiArrowRight, FiGift, FiMenu, FiPhone, FiX } from "react-icons/fi";
 import Img from "./Img";
 import Social from "./Social";
-import { scrollToSection } from "../lib/scrollToSection";
 import { logo } from "../assets/img";
 import { BUSINESS, NAV } from "../data/content";
 
@@ -48,13 +47,16 @@ function useActiveSection() {
   return { active, scrolled };
 }
 
-function NavLink({ item, active, onClick }) {
+// Linki prowadzą do podstron (/cennik/ itd. – widzi je Google), a na stronie głównej
+// przewijają do sekcji (data-section, obsługa w src/lib/scrollToSection.js)
+function NavLink({ item, active, currentPage, onClick }) {
   const isActive = active === item.id;
   return (
     <a
-      href={`#${item.id}`}
+      href={item.path}
+      data-section={item.id}
       onClick={onClick}
-      aria-current={isActive ? "true" : undefined}
+      aria-current={currentPage === item.id ? "page" : isActive ? "true" : undefined}
       className={`flex items-center gap-2 whitespace-nowrap transition-colors hover:text-prime ${
         isActive ? "text-prime" : "text-textPrimary"
       }`}
@@ -70,9 +72,75 @@ function NavLink({ item, active, onClick }) {
   );
 }
 
-export default function Navbar() {
+const PROMO_KEY = "mc-promo-vouchery"; // ukrycie paska ✕ na 14 dni (patrz skrypt w index.html)
+
+/** Pasek nad menu: nowość – vouchery online. Chowa się po przewinięciu strony. */
+function PromoBar({ show, onClose }) {
+  return (
+    <div
+      className={`promo-bar overflow-hidden bg-prime text-bgPrimary transition-[height] duration-300 ${
+        show ? "h-9" : "h-0"
+      }`}
+    >
+      <div className="relative flex h-9 items-center justify-center px-11">
+        <a
+          href="/vouchery/"
+          tabIndex={show ? 0 : -1}
+          className="flex min-w-0 items-center gap-2 text-[12px] font-medium tracking-[0.02em] sm:text-[13px]"
+        >
+          <FiGift aria-hidden="true" className="shrink-0 text-[15px]" />
+          <span className="truncate">
+            <span className="uppercase tracking-[0.12em]">Nowość:</span>
+            <span className="md:hidden"> voucher w eleganckim pudełku</span>
+            <span className="hidden md:inline">
+              {" "}
+              zamów voucher online – odbierz go w gabinecie w eleganckim pudełku albo od razu na e-mail
+            </span>
+          </span>
+          <span className="hidden shrink-0 items-center gap-1 underline underline-offset-2 sm:flex">
+            Kup voucher <FiArrowRight aria-hidden="true" />
+          </span>
+          <FiArrowRight aria-hidden="true" className="shrink-0 sm:hidden" />
+        </a>
+        <button
+          type="button"
+          onClick={onClose}
+          tabIndex={show ? 0 : -1}
+          aria-label="Ukryj informację o voucherach"
+          className="absolute right-1 top-0 flex h-9 w-10 items-center justify-center text-[17px] opacity-70 transition-opacity hover:opacity-100"
+        >
+          <FiX aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function Navbar({ page }) {
   const [open, setOpen] = useState(false);
   const { active, scrolled } = useActiveSection();
+  const [promoClosed, setPromoClosed] = useState(false);
+  const promo = page?.key !== "vouchery"; // na stronie voucherów pasek niepotrzebny
+  // podstrona: podświetl jej pozycję w menu, gdy żadna sekcja z menu nie jest akurat na ekranie
+  const currentPage = page && page.key !== "home" ? NAV.find((n) => n.path === page.path)?.id : undefined;
+  const shown = active ?? currentPage;
+
+  useEffect(() => {
+    try {
+      if (Number(localStorage.getItem(PROMO_KEY)) > Date.now()) setPromoClosed(true);
+    } catch {
+      /* brak dostępu do localStorage – pasek zostaje */
+    }
+  }, []);
+
+  const closePromo = () => {
+    setPromoClosed(true);
+    try {
+      localStorage.setItem(PROMO_KEY, String(Date.now() + 14 * 864e5));
+    } catch {
+      /* trudno – schowany do odświeżenia strony */
+    }
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -81,12 +149,6 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Menu mobilne: zamknij i przewiń do sekcji (patrz src/lib/scrollToSection.js)
-  const goTo = (e, id) => {
-    e.preventDefault();
-    setOpen(false);
-    scrollToSection(id);
-  };
 
   return (
     <header
@@ -96,6 +158,7 @@ export default function Navbar() {
           : "bg-gradient-to-b from-bgPrimary/60 to-transparent"
       }`}
     >
+      {promo && <PromoBar show={!promoClosed && !scrolled && !open} onClose={closePromo} />}
       <nav
         aria-label="Menu główne"
         className="mx-auto flex h-[76px] items-center justify-between px-5 lg:grid lg:h-[110px] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-6 xl:gap-8 lg:px-10 xl:px-[98px]"
@@ -104,14 +167,15 @@ export default function Navbar() {
         <ul className="hidden items-center gap-4 text-[12px] font-light uppercase tracking-[0.1em] lg:flex xl:gap-5 xl:text-[13px] xl:tracking-[0.12em] 2xl:gap-8 2xl:text-[15px]">
           {LEFT.map((item) => (
             <li key={item.id}>
-              <NavLink item={item} active={active} />
+              <NavLink item={item} active={shown} currentPage={currentPage} />
             </li>
           ))}
         </ul>
 
         {/* Logo */}
         <a
-          href="#start"
+          href="/"
+          data-section="start"
           className="relative z-20 shrink-0 lg:justify-self-center"
           aria-label="Mento Care – strona główna"
         >
@@ -129,7 +193,7 @@ export default function Navbar() {
           <ul className="flex items-center gap-4 xl:gap-5 2xl:gap-8">
             {RIGHT.map((item) => (
               <li key={item.id}>
-                <NavLink item={item} active={active} />
+                <NavLink item={item} active={shown} currentPage={currentPage} />
               </li>
             ))}
           </ul>
@@ -149,7 +213,7 @@ export default function Navbar() {
             href={BUSINESS.booksyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-prime/80 bg-bgPrimary/40 px-4 py-2 text-[12px] uppercase tracking-[0.14em] text-prime backdrop-blur-sm"
+            className="rounded-full border border-prime/80 bg-bgPrimary/60 px-4 py-2 text-[12px] uppercase tracking-[0.14em] text-prime"
           >
             zarezerwuj
           </a>
@@ -169,7 +233,7 @@ export default function Navbar() {
       {/* Menu mobilne */}
       <div
         id="menu-mobilne"
-        className={`fixed inset-0 z-10 flex flex-col items-center justify-center overscroll-none bg-bgPrimary/95 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-10 flex flex-col items-center justify-center overscroll-none bg-bgPrimary/[0.97] transition-opacity duration-300 lg:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -177,10 +241,12 @@ export default function Navbar() {
           {NAV.map((item) => (
             <li key={item.id}>
               <a
-                href={`#${item.id}`}
-                onClick={(e) => goTo(e, item.id)}
+                href={item.path}
+                data-section={item.id}
+                onClick={() => setOpen(false)}
                 tabIndex={open ? 0 : -1}
-                className={active === item.id ? "text-prime" : ""}
+                aria-current={currentPage === item.id ? "page" : undefined}
+                className={shown === item.id ? "text-prime" : ""}
               >
                 {item.label}
               </a>

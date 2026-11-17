@@ -6,13 +6,19 @@
     <title>Kosmetologia Bochnia – Mento Care | Kosmetolog Faustyna Hojnor</title>
     <meta
       name="description"
-      content="Gabinet kosmetologii estetycznej w Bochni (ul. Nad Babicą 2): terapia trądziku, mezoterapia, stymulatory tkankowe, Kobido, Head SPA. Zarezerwuj online!"
+      content="Gabinet kosmetologii estetycznej w Bochni (ul. Nad Babicą 2): terapia trądziku, mezoterapia, stymulatory, Kobido, Head SPA. Vouchery podarunkowe online."
     />
     <link rel="canonical" href="https://mentocare.pl/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="author" content="Mento Care – Faustyna Hojnor" />
     <meta name="theme-color" content="#0B0C0F" />
     <meta name="format-detection" content="telephone=no" />
+    <script>
+      // pasek „Nowość: vouchery” schowany ✕ – ukryj go od razu, bez mignięcia (src/components/Navbar.jsx)
+      try {
+        if (+localStorage.getItem("mc-promo-vouchery") > Date.now()) document.documentElement.classList.add("promo-off");
+      } catch (e) {}
+    </script>
 
     <meta name="geo.region" content="PL-12" />
     <meta name="geo.placename" content="Bochnia" />

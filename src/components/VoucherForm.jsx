@@ -5,6 +5,10 @@
  */
 import { useEffect, useRef, useState } from "react";
 import { FiCheck, FiChevronDown, FiCopy, FiPhone } from "react-icons/fi";
+import Img from "./Img";
+import Zoom from "./Zoom";
+import { PdfCard } from "./VoucherLooks";
+import { voucherPdf, voucherPudelko } from "../assets/img";
 import { BUSINESS, PRICE_LIST, SELLER, VOUCHER, formatPrice, monthsLabel } from "../data/content";
 
 export const FORM_NAME = "voucher";
@@ -39,13 +43,13 @@ const DELIVERY = [
   {
     id: "odbior",
     label: "Odbiór w gabinecie",
-    hint: `voucher papierowy · +${zl(VOUCHER.printedFee)}`,
+    hint: `w pudełku · +${zl(VOUCHER.printedFee)}`,
     fee: VOUCHER.printedFee,
   },
   {
     id: "wysylka",
     label: "Wysyłka na adres",
-    hint: `z przesyłką · +${zl(VOUCHER.printedFee + VOUCHER.shippingFee)}`,
+    hint: `w pudełku, z przesyłką · +${zl(VOUCHER.printedFee + VOUCHER.shippingFee)}`,
     fee: VOUCHER.printedFee + VOUCHER.shippingFee,
   },
 ];
@@ -392,6 +396,40 @@ export default function VoucherForm({ onClose }) {
               </span>
             </Choice>
           ))}
+        </div>
+
+        {/* podgląd: jak wygląda voucher w wybranej formie */}
+        <div className="mt-3 flex items-center gap-4 rounded-md border border-cream/10 bg-cream/[0.03] p-2.5">
+          {delivery === "email" ? (
+            <Zoom
+              img={voucherPdf}
+              alt="Przykładowy voucher Mento Care w PDF"
+              caption="Voucher elektroniczny (PDF)"
+              className="h-[96px] w-[150px] shrink-0 overflow-hidden rounded sm:w-[168px]"
+            >
+              <PdfCard sizes="180px" className="p-[8px]" />
+            </Zoom>
+          ) : (
+            <Zoom
+              img={voucherPudelko}
+              alt="Voucher Mento Care w eleganckim pudełku"
+              caption="Voucher w eleganckim pudełku"
+              className="h-[96px] w-[150px] shrink-0 overflow-hidden rounded bg-[#080808] sm:w-[168px]"
+            >
+              <Img
+                img={voucherPudelko}
+                alt="Voucher Mento Care w eleganckim pudełku"
+                sizes="180px"
+                className="h-full w-full object-cover"
+              />
+            </Zoom>
+          )}
+          <p className="text-[13px] leading-snug text-cream/80">
+            {delivery === "email"
+              ? "Tak wygląda voucher w PDF – przyjdzie na Twój e-mail zaraz po zamówieniu."
+              : "Voucher w eleganckim pudełku – prezent gotowy do wręczenia."}
+            <span className="mt-1 block text-[12px] text-cream/50">Kliknij zdjęcie, aby powiększyć.</span>
+          </p>
         </div>
 
         {delivery === "wysylka" && (

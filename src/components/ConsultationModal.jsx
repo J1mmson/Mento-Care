@@ -1,6 +1,6 @@
 import { FiCheck, FiClock } from "react-icons/fi";
 import Modal from "./Modal";
-import { scrollToSection } from "../lib/scrollToSection";
+import { goToSection } from "../lib/scrollToSection";
 import { BUSINESS, CONSULTATIONS } from "../data/content";
 
 /** Okno „Dowiedz się więcej” przy konsultacji – treści w src/data/business.js → CONSULTATIONS */
@@ -8,7 +8,7 @@ export default function ConsultationModal({ open, onClose }) {
   const toPricing = (e) => {
     e.preventDefault();
     onClose();
-    requestAnimationFrame(() => scrollToSection("cennik"));
+    requestAnimationFrame(() => goToSection("cennik"));
   };
 
   return (

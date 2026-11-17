@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiClock, FiMapPin, FiNavigation, FiPhone, FiStar } from "react-icons/fi";
 import Social from "../components/Social";
 import { BUSINESS, VOUCHER } from "../data/content";
+import { PAGES } from "../data/pages";
 
 function MapEmbed() {
   const [loaded, setLoaded] = useState(false);
@@ -120,7 +121,19 @@ export default function Contact() {
         </div>
       </div>
 
-      <footer className="mt-6 flex flex-col items-center gap-1 border-t border-cream/10 py-5 text-center text-[12px] text-cream/50 lg:flex-row lg:justify-between lg:text-left">
+      {/* linki do podstron – pomagają Google zrozumieć strukturę strony */}
+      <nav aria-label="Na skróty" className="mt-6 border-t border-cream/10 pt-5">
+        <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-[13px] uppercase tracking-[0.12em] text-cream/70 lg:justify-start">
+          {PAGES.map((p) => (
+            <li key={p.key}>
+              <a href={p.path} data-section={p.sections[0]} className="transition-colors hover:text-prime">
+                {p.crumb}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <footer className="mt-4 flex flex-col items-center gap-1 py-5 text-center text-[12px] text-cream/50 lg:flex-row lg:justify-between lg:text-left">
         <p>
           © <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
           {BUSINESS.name} · {BUSINESS.owner} · Kosmetologia estetyczna Bochnia ·{" "}
