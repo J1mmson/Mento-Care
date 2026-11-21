@@ -197,8 +197,9 @@ export const SELLER = {
 export const VOUCHER = {
   amounts: [200, 300, 500], // gotowe kwoty do wyboru (+ „inna kwota”)
   minAmount: 100,
-  // dopłaty za formę przekazania vouchera (zł); e-mail (PDF) jest bez dopłat
-  printedFee: 10, // voucher papierowy – odbiór w gabinecie albo wysyłka
+  // dopłaty za formę vouchera i przekazanie (zł); e-mail (PDF) jest bez dopłat
+  printedFee: 10, // voucher papierowy (kartka w czarnej kopercie) – odbiór w gabinecie albo wysyłka
+  premiumFee: 39, // voucher premium w eleganckim pudełku – doliczana do printedFee (odbiór 49 zł, wysyłka 64 zł)
   shippingFee: 15, // przesyłka na adres – doliczana do printedFee
   accountHolder: SELLER.name,
   bankAccount: "14 1240 5123 1111 0011 1042 3677",
@@ -207,7 +208,7 @@ export const VOUCHER = {
   multiUse: true, // voucher kwotowy można wykorzystać w kilku częściach, do wyczerpania kwoty
   paymentDays: 7, // tyle dni klient ma na wpłatę, potem zamówienie można anulować
   termsUrl: "/regulamin-voucherow/",
-  termsDate: "11 listopada 2026", // data wersji regulaminu
+  termsDate: "21 listopada 2026", // data wersji regulaminu
   // Automat voucherów (Google Apps Script w arkuszu Mento-Care-vouchery na koncie mentocarebochnia):
   // formularz wysyła tu kopię każdego zamówienia → wiersz w arkuszu + e-mail z voucherem do kupującego.
   // Adres = „Wdróż → Zarządzaj wdrożeniami” w Apps Script (+ ?token= z CONFIG w Code.gs). Puste = wyłączone.
@@ -396,7 +397,7 @@ export const FAQ = [
   },
   {
     q: "Czy mogę podarować zabieg w prezencie?",
-    a: `Tak – voucher na dowolną kwotę lub na konkretny zabieg kupisz online w sekcji „Voucher” na tej stronie. Voucher w PDF wyślemy e-mailem od razu po złożeniu zamówienia (stanie się aktywny po zaksięgowaniu wpłaty), a voucher papierowy po wpłacie przygotujemy do odbioru w gabinecie albo wyślemy pocztą na wskazany adres. Voucher jest ważny ${monthsLabel(VOUCHER.validityMonths)} od daty zakupu${VOUCHER.multiUse ? ", a voucher na kwotę możesz wykorzystać na kilka wizyt" : ""}. Możesz też zadzwonić: 505 204 943.`,
+    a: `Tak – voucher na dowolną kwotę lub na konkretny zabieg kupisz online w sekcji „Voucher” na tej stronie. Voucher w PDF wyślemy e-mailem od razu po złożeniu zamówienia (stanie się aktywny po zaksięgowaniu wpłaty), a voucher papierowy – w czarnej kopercie albo w wersji premium w eleganckim pudełku – po wpłacie przygotujemy do odbioru w gabinecie albo wyślemy pocztą na wskazany adres. Voucher jest ważny ${monthsLabel(VOUCHER.validityMonths)} od daty zakupu${VOUCHER.multiUse ? ", a voucher na kwotę możesz wykorzystać na kilka wizyt" : ""}. Możesz też zadzwonić: 505 204 943.`,
   },
   {
     q: "Czy wykonujecie zabiegi dla mężczyzn?",

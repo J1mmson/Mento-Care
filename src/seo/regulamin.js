@@ -34,8 +34,10 @@ export function buildRegulamin() {
       `Po wysłaniu formularza Klient widzi na ekranie numer vouchera oraz dane do płatności. Umowa zostaje zawarta z chwilą wysłania zamówienia. Potwierdzenie zawarcia umowy wraz z danymi do płatności Sprzedawca wysyła automatycznie e-mailem na adres podany w zamówieniu.`,
       `Ceny podane są w złotych polskich i zawierają podatki. Do wartości vouchera doliczana jest opłata za formę przekazania:<ul>
         <li>e-mailem (plik PDF do samodzielnego wydruku) – bez dopłat,</li>
-        <li>odbiór w gabinecie (voucher papierowy) – ${zl(V.printedFee)},</li>
-        <li>wysyłka na adres w Polsce (voucher papierowy i przesyłka) – ${zl(V.printedFee + V.shippingFee)}.</li>
+        <li>odbiór w gabinecie – voucher papierowy w czarnej kopercie – ${zl(V.printedFee)},</li>
+        <li>wysyłka na adres w Polsce – voucher papierowy w czarnej kopercie i przesyłka – ${zl(V.printedFee + V.shippingFee)},</li>
+        <li>odbiór w gabinecie – voucher premium w eleganckim pudełku – ${zl(V.printedFee + V.premiumFee)},</li>
+        <li>wysyłka na adres w Polsce – voucher premium w eleganckim pudełku i przesyłka – ${zl(V.printedFee + V.premiumFee + V.shippingFee)}.</li>
       </ul>Łączna kwota do zapłaty jest widoczna w formularzu przed wysłaniem zamówienia.`,
       `Najniższa wartość vouchera kwotowego wynosi ${zl(V.minAmount)}. Wartość vouchera na zabieg odpowiada cenie zabiegu z cennika obowiązującego w dniu zamówienia.`,
     ])),
@@ -49,7 +51,7 @@ export function buildRegulamin() {
     section(4, "Przekazanie vouchera", list([
       `Voucher przekazywany e-mailem Sprzedawca wysyła automatycznie, niezwłocznie po złożeniu zamówienia, jako plik PDF na adres podany w zamówieniu. Voucher staje się aktywny – i może zostać wykorzystany – po zaksięgowaniu wpłaty.`,
       `Sprzedawca potwierdza zaksięgowanie wpłaty niezwłocznie, nie później niż w ciągu 2 dni roboczych od jej wpływu. Klient otrzymuje wtedy e-mail z informacją, że voucher jest aktywny.`,
-      `Voucher papierowy Sprzedawca przygotowuje po zaksięgowaniu wpłaty:<ul>
+      `Voucher papierowy (w czarnej kopercie albo w wersji premium w eleganckim pudełku) Sprzedawca przygotowuje po zaksięgowaniu wpłaty:<ul>
         <li>odbiór w gabinecie – voucher czeka w gabinecie przy ul. ${studio} od następnego dnia roboczego, w godzinach otwarcia,</li>
         <li>wysyłka – Sprzedawca nadaje przesyłkę na adres w Polsce podany w zamówieniu w ciągu 3 dni roboczych.</li>
       </ul>`,

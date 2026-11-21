@@ -68,7 +68,7 @@ export const PAGES = [
     h1: "Voucher podarunkowy Mento Care – kup online",
     title: "Voucher podarunkowy – kup online | Mento Care Bochnia",
     description:
-      "Podaruj voucher na zabieg lub dowolną kwotę. PDF od razu na e-mail albo voucher w eleganckim pudełku – do odbioru w Bochni lub z wysyłką.",
+      "Podaruj voucher na zabieg lub dowolną kwotę: PDF od razu na e-mail, kartka w czarnej kopercie albo premium w eleganckim pudełku – odbiór w Bochni lub wysyłka.",
     ogImage: "/og-vouchery.jpg",
   },
   {

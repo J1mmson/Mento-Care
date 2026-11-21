@@ -91,10 +91,10 @@ function PromoBar({ show, onClose }) {
           <FiGift aria-hidden="true" className="shrink-0 text-[15px]" />
           <span className="truncate">
             <span className="uppercase tracking-[0.12em]">Nowość:</span>
-            <span className="md:hidden"> voucher w eleganckim pudełku</span>
+            <span className="md:hidden"> voucher premium w eleganckim pudełku</span>
             <span className="hidden md:inline">
               {" "}
-              zamów voucher online – odbierz go w gabinecie w eleganckim pudełku albo od razu na e-mail
+              zamów voucher online – także premium w eleganckim pudełku, z odbiorem w gabinecie lub wysyłką
             </span>
           </span>
           <span className="hidden shrink-0 items-center gap-1 underline underline-offset-2 sm:flex">

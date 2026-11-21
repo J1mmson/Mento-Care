@@ -37,23 +37,23 @@ const PAYMENTS = [
   VOUCHER.blikPhone && { id: "blik", label: "BLIK na telefon" },
 ].filter(Boolean);
 
-// Forma przekazania + dopłata (VOUCHER.printedFee / shippingFee w business.js)
-const DELIVERY = [
-  { id: "email", label: "E-mailem", hint: "PDF od razu na e-mail · bez dopłat", fee: 0 },
-  {
-    id: "odbior",
-    label: "Odbiór w gabinecie",
-    hint: `w pudełku · +${zl(VOUCHER.printedFee)}`,
-    fee: VOUCHER.printedFee,
-  },
-  {
-    id: "wysylka",
-    label: "Wysyłka na adres",
-    hint: `w pudełku, z przesyłką · +${zl(VOUCHER.printedFee + VOUCHER.shippingFee)}`,
-    fee: VOUCHER.printedFee + VOUCHER.shippingFee,
-  },
+// Forma vouchera + przekazanie i dopłaty (VOUCHER.printedFee / premiumFee / shippingFee w business.js)
+const PAPER_FEE = { koperta: VOUCHER.printedFee, premium: VOUCHER.printedFee + VOUCHER.premiumFee };
+const FORMATS = [
+  { id: "email", label: "E-mailem (PDF)", hint: "od razu na e-mail · bez dopłat" },
+  { id: "koperta", label: "W czarnej kopercie", hint: `kartka papierowa · od +${zl(PAPER_FEE.koperta)}` },
+  { id: "premium", label: "Premium w pudełku", hint: `eleganckie pudełko · od +${zl(PAPER_FEE.premium)}` },
 ];
-const DELIVERY_BY_ID = Object.fromEntries(DELIVERY.map((d) => [d.id, d]));
+const PACK = { koperta: "w czarnej kopercie", premium: "premium w eleganckim pudełku" };
+const HANDOVER = [
+  { id: "odbior", label: "Odbiór w gabinecie", extra: 0 },
+  { id: "wysylka", label: "Wysyłka na adres", extra: VOUCHER.shippingFee },
+];
+const feeFor = (format, handover) =>
+  format === "email" ? 0 : PAPER_FEE[format] + (handover === "wysylka" ? VOUCHER.shippingFee : 0);
+/** np. „premium w eleganckim pudełku, wysyłka” */
+const feeLabel = (format, handover) =>
+  `${PACK[format]}, ${handover === "wysylka" ? "wysyłka" : "odbiór w gabinecie"}`;
 
 function Choice({ name, value, checked, onChange, children }) {
   return (
@@ -136,7 +136,7 @@ function Confirmation({ order, onClose, onAgain }) {
         {order.fee > 0 && (
           <span className="text-cream/60">
             {" "}
-            (w tym {DELIVERY_BY_ID[order.delivery].label.toLowerCase()} {zl(order.fee)})
+            (w tym {feeLabel(order.format, order.handover)} {zl(order.fee)})
           </span>
         )}
         .
@@ -171,8 +171,9 @@ function Confirmation({ order, onClose, onAgain }) {
         {order.delivery === "email" &&
           `Voucher w PDF za chwilę przyjdzie na ${order.email} – możesz go od razu przekazać. Będzie aktywny po zaksięgowaniu wpłaty – potwierdzimy to e-mailem.`}
         {order.delivery === "odbior" &&
-          `Po zaksięgowaniu wpłaty voucher będzie czekał na Ciebie w gabinecie – ul. ${BUSINESS.street}, ${BUSINESS.city}.`}
-        {order.delivery === "wysylka" && `Po zaksięgowaniu wpłaty wyślemy voucher na adres: ${order.address}.`}
+          `Po zaksięgowaniu wpłaty voucher ${PACK[order.format]} będzie czekał na Ciebie w gabinecie – ul. ${BUSINESS.street}, ${BUSINESS.city}.`}
+        {order.delivery === "wysylka" &&
+          `Po zaksięgowaniu wpłaty wyślemy voucher ${PACK[order.format]} na adres: ${order.address}.`}
       </p>
       <p className="mt-2 text-[14px] leading-relaxed text-cream/70">
         Potwierdzenie zamówienia przyjdzie e-mailem w ciągu kilku minut – jeśli go nie widzisz, zajrzyj do folderu
@@ -199,7 +200,8 @@ export default function VoucherForm({ onClose }) {
   const [amount, setAmount] = useState(String(VOUCHER.amounts[1] ?? VOUCHER.amounts[0]));
   const [custom, setCustom] = useState("");
   const [treatmentKey, setTreatmentKey] = useState("");
-  const [delivery, setDelivery] = useState("email");
+  const [format, setFormat] = useState("email"); // email | koperta | premium
+  const [handover, setHandover] = useState("odbior"); // odbior | wysylka (wersje papierowe)
   const [payment, setPayment] = useState(PAYMENTS[0].id);
   const [status, setStatus] = useState("idle"); // idle | sending | error
   const [order, setOrder] = useState(null);
@@ -207,8 +209,9 @@ export default function VoucherForm({ onClose }) {
   const treatment = TREATMENT_BY_KEY[treatmentKey];
   const value =
     kind === "zabieg" ? treatment?.price ?? 0 : amount === "inna" ? Number(custom) || 0 : Number(amount);
-  const deliveryOption = DELIVERY_BY_ID[delivery];
-  const total = value > 0 ? value + deliveryOption.fee : 0;
+  const delivery = format === "email" ? "email" : handover; // email | odbior | wysylka
+  const fee = feeFor(format, handover);
+  const total = value > 0 ? value + fee : 0;
 
   if (order) return <Confirmation order={order} onClose={onClose} onAgain={() => setOrder(null)} />;
 
@@ -239,7 +242,11 @@ export default function VoucherForm({ onClose }) {
       zabieg: treatment ? `${treatment.category} – ${treatment.name} (${formatPrice(treatment)})` : "",
       kwota: zl(value),
       dla_kogo: field("dla_kogo"),
-      dostawa: deliveryOption.fee ? `${deliveryOption.label} (+${zl(deliveryOption.fee)})` : deliveryOption.label,
+      // np. „Wysyłka na adres – premium w eleganckim pudełku (+64 zł)” (arkusz rozpoznaje odbiór/wysyłkę i „premium”)
+      dostawa:
+        format === "email"
+          ? "E-mailem (PDF)"
+          : `${HANDOVER.find((h) => h.id === handover).label} – ${PACK[format]} (+${zl(fee)})`,
       adres: address,
       platnosc: PAYMENTS.find((p) => p.id === payment).label,
       do_zaplaty: zl(total),
@@ -273,7 +280,7 @@ export default function VoucherForm({ onClose }) {
           }).catch((err) => console.error("[voucher] arkusz", err));
         }
       }
-      setOrder({ code, label, total, fee: deliveryOption.fee, name, email, delivery, payment, address });
+      setOrder({ code, label, total, fee, name, email, delivery, format, handover, payment, address });
       setStatus("idle");
     } catch (err) {
       console.error("[voucher]", err);
@@ -386,90 +393,108 @@ export default function VoucherForm({ onClose }) {
         />
       </Group>
 
-      <Group legend="Jak przekazać voucher">
+      <Group legend="Forma vouchera">
         <div className="grid gap-2 sm:grid-cols-3">
-          {DELIVERY.map((d) => (
-            <Choice key={d.id} name="dostawa" value={d.id} checked={delivery === d.id} onChange={setDelivery}>
+          {FORMATS.map((f) => (
+            <Choice key={f.id} name="forma" value={f.id} checked={format === f.id} onChange={setFormat}>
               <span className="flex flex-col items-center gap-0.5">
-                <span>{d.label}</span>
-                <span className="text-[12px] opacity-70">{d.hint}</span>
+                <span>{f.label}</span>
+                <span className="text-[12px] opacity-70">{f.hint}</span>
               </span>
             </Choice>
           ))}
         </div>
 
-        {/* podgląd: jak wygląda voucher w wybranej formie */}
+        {/* podgląd: jak wygląda voucher w wybranej formie (kliknięcie powiększa) */}
         <div className="mt-3 flex items-center gap-4 rounded-md border border-cream/10 bg-cream/[0.03] p-2.5">
-          {delivery === "email" ? (
-            <Zoom
-              img={voucherPdf}
-              alt="Przykładowy voucher Mento Care w PDF"
-              caption="Voucher elektroniczny (PDF)"
-              className="h-[96px] w-[150px] shrink-0 overflow-hidden rounded sm:w-[168px]"
-            >
-              <PdfCard sizes="180px" className="p-[8px]" />
-            </Zoom>
-          ) : (
+          {format === "premium" ? (
             <Zoom
               img={voucherPudelko}
-              alt="Voucher Mento Care w eleganckim pudełku"
-              caption="Voucher w eleganckim pudełku"
+              alt="Voucher premium Mento Care w eleganckim pudełku"
+              caption="Voucher premium w eleganckim pudełku"
               className="h-[96px] w-[150px] shrink-0 overflow-hidden rounded bg-[#080808] sm:w-[168px]"
             >
               <Img
                 img={voucherPudelko}
-                alt="Voucher Mento Care w eleganckim pudełku"
+                alt="Voucher premium Mento Care w eleganckim pudełku"
                 sizes="180px"
                 className="h-full w-full object-cover"
               />
             </Zoom>
+          ) : (
+            <Zoom
+              img={voucherPdf}
+              alt="Przykładowy voucher Mento Care"
+              caption={format === "email" ? "Voucher elektroniczny (PDF)" : "Voucher w czarnej kopercie"}
+              className="h-[96px] w-[150px] shrink-0 overflow-hidden rounded sm:w-[168px]"
+            >
+              <PdfCard sizes="180px" className="p-[8px]" />
+            </Zoom>
           )}
           <p className="text-[13px] leading-snug text-cream/80">
-            {delivery === "email"
-              ? "Tak wygląda voucher w PDF – przyjdzie na Twój e-mail zaraz po zamówieniu."
-              : "Voucher w eleganckim pudełku – prezent gotowy do wręczenia."}
+            {format === "email" && "Tak wygląda voucher w PDF – przyjdzie na Twój e-mail zaraz po zamówieniu."}
+            {format === "koperta" && "Tak wygląda kartka vouchera – dostaniesz ją w eleganckiej czarnej kopercie."}
+            {format === "premium" && "Voucher premium w eleganckim pudełku – prezent gotowy do wręczenia."}
             <span className="mt-1 block text-[12px] text-cream/50">Kliknij zdjęcie, aby powiększyć.</span>
           </p>
         </div>
-
-        {delivery === "wysylka" && (
-          <div className="mt-3 grid gap-3 sm:grid-cols-[2fr_3fr]">
-            <input
-              name="adres_odbiorca"
-              autoComplete="shipping name"
-              maxLength={80}
-              placeholder="Odbiorca przesyłki (jeśli inny niż Ty)"
-              className="field sm:col-span-2"
-            />
-            <input
-              name="adres_ulica"
-              required
-              autoComplete="shipping street-address"
-              maxLength={100}
-              placeholder="Ulica, numer domu / mieszkania"
-              className="field sm:col-span-2"
-            />
-            <input
-              name="adres_kod"
-              required
-              autoComplete="shipping postal-code"
-              inputMode="numeric"
-              pattern="[0-9]{2}-[0-9]{3}"
-              title="Kod pocztowy, np. 32-700"
-              placeholder="Kod pocztowy"
-              className="field"
-            />
-            <input
-              name="adres_miasto"
-              required
-              autoComplete="shipping address-level2"
-              maxLength={60}
-              placeholder="Miejscowość"
-              className="field"
-            />
-          </div>
-        )}
       </Group>
+
+      {format !== "email" && (
+        <Group legend="Jak przekazać voucher">
+          <div className="grid gap-2 sm:grid-cols-2">
+            {HANDOVER.map((h) => (
+              <Choice key={h.id} name="przekazanie" value={h.id} checked={handover === h.id} onChange={setHandover}>
+                <span className="flex flex-col items-center gap-0.5">
+                  <span>{h.label}</span>
+                  <span className="text-[12px] opacity-70">
+                    +{zl(PAPER_FEE[format] + h.extra)}
+                    {h.extra ? ` (w tym przesyłka ${zl(h.extra)})` : ""}
+                  </span>
+                </span>
+              </Choice>
+            ))}
+          </div>
+
+          {delivery === "wysylka" && (
+            <div className="mt-3 grid gap-3 sm:grid-cols-[2fr_3fr]">
+              <input
+                name="adres_odbiorca"
+                autoComplete="shipping name"
+                maxLength={80}
+                placeholder="Odbiorca przesyłki (jeśli inny niż Ty)"
+                className="field sm:col-span-2"
+              />
+              <input
+                name="adres_ulica"
+                required
+                autoComplete="shipping street-address"
+                maxLength={100}
+                placeholder="Ulica, numer domu / mieszkania"
+                className="field sm:col-span-2"
+              />
+              <input
+                name="adres_kod"
+                required
+                autoComplete="shipping postal-code"
+                inputMode="numeric"
+                pattern="[0-9]{2}-[0-9]{3}"
+                title="Kod pocztowy, np. 32-700"
+                placeholder="Kod pocztowy"
+                className="field"
+              />
+              <input
+                name="adres_miasto"
+                required
+                autoComplete="shipping address-level2"
+                maxLength={60}
+                placeholder="Miejscowość"
+                className="field"
+              />
+            </div>
+          )}
+        </Group>
+      )}
 
       <Group legend="Płatność">
         <div className={`grid gap-2 ${PAYMENTS.length > 1 ? "sm:grid-cols-2" : ""}`}>
@@ -530,9 +555,9 @@ export default function VoucherForm({ onClose }) {
               {total > 0 ? zl(total) : "—"}
             </span>
           </p>
-          {total > 0 && deliveryOption.fee > 0 && (
+          {total > 0 && fee > 0 && (
             <p className="mt-1 text-[13px] text-cream/55">
-              voucher {zl(value)} + {deliveryOption.label.toLowerCase()} {zl(deliveryOption.fee)}
+              voucher {zl(value)} + {feeLabel(format, handover)} {zl(fee)}
             </p>
           )}
         </div>

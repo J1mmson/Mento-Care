@@ -14,7 +14,7 @@ const STEPS = [
   },
   {
     title: "Odbierz voucher",
-    text: "Voucher w eleganckim pudełku odbierzesz w gabinecie albo wyślemy go pocztą. Wersja PDF przychodzi od razu na e-mail.",
+    text: "Kartkę w czarnej kopercie albo voucher premium w eleganckim pudełku odbierzesz w gabinecie lub wyślemy pocztą. Wersja PDF przychodzi od razu na e-mail.",
   },
   {
     title: "Umów wizytę",
@@ -24,7 +24,7 @@ const STEPS = [
   },
 ];
 
-/** Podstrona /vouchery/: jak wygląda voucher (PDF i pudełko) + jak to działa. */
+/** Podstrona /vouchery/: jak wygląda voucher (premium w pudełku, kartka w kopercie / PDF) + jak to działa. */
 export default function VoucherDetails() {
   return (
     <section

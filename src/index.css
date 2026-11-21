@@ -118,6 +118,23 @@
   display: none;
 }
 
+/* film w pętli (src/components/LoopVideo.jsx): nigdy nie pokazuj przycisku „play” iPhone'a –
+   gdy telefon zablokuje odtwarzanie (np. tryb niskiego zużycia energii), widać po prostu zdjęcie */
+.loop-video::-webkit-media-controls,
+.loop-video::-webkit-media-controls-start-playback-button,
+.loop-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+/* Safari (film jako obrazek): przy otwartym oknie film znika, a pod oknem zostaje zdjęcie – telefon ma całą moc dla formularza */
+.loop-under,
+.modal-open .loop-anim {
+  visibility: hidden;
+}
+.modal-open .loop-under {
+  visibility: visible;
+}
+
 /* film w sekcji voucherów: brzegi łagodnie przechodzą w tło strony (src/sections/Voucher.jsx) */
 .video-fade {
   -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent);

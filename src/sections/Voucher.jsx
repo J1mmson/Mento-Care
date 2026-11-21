@@ -66,8 +66,8 @@ export default function Voucher() {
           moment tylko dla siebie.
         </p>
         <p className="mt-3 text-[14px] text-cream/70 lg:text-[15px]">
-          Na dowolną kwotę lub wybrany zabieg – w eleganckim pudełku do odbioru w gabinecie lub z wysyłką,
-          albo od razu e-mailem jako PDF ·{" "}
+          Na dowolną kwotę lub wybrany zabieg – premium w eleganckim pudełku, klasycznie w czarnej kopercie
+          (odbiór w gabinecie lub wysyłka) albo od razu e-mailem jako PDF ·{" "}
           <a href={VOUCHER.termsUrl} className="underline underline-offset-2 hover:text-prime">
             regulamin
           </a>
@@ -101,7 +101,7 @@ export default function Voucher() {
           aria-haspopup="dialog"
           className="mt-5 inline-flex items-center gap-2 text-[15px] text-prime underline decoration-prime/50 underline-offset-4 transition-colors hover:decoration-prime"
         >
-          <FiEye aria-hidden="true" /> Zobacz, jak wygląda voucher – PDF i w pudełku
+          <FiEye aria-hidden="true" /> Zobacz, jak wygląda voucher – klasyczny i premium
         </button>
       </div>
 
